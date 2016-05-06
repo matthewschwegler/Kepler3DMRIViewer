@@ -1,0 +1,103 @@
+application.title=_kepler.build
+application.vendor=davidwelker
+build.classes.dir=${build.dir}/classes
+build.classes.excludes=**/*.java,**/*.form
+# This directory is removed when the project is cleaned:
+build.dir=target
+build.generated.dir=${build.dir}/generated
+# Only compile against the classpath explicitly listed here:
+build.sysclasspath=ignore
+build.test.classes.dir=${build.dir}/test/classes
+build.test.results.dir=${build.dir}/test/results
+buildfile=nbbuild.xml
+debug.classpath=\
+    ${run.classpath}
+debug.test.classpath=\
+    ${run.test.classpath}
+# This directory is removed when the project is cleaned:
+dist.dir=target
+dist.jar=${dist.dir}/_kepler.build.jar
+dist.javadoc.dir=${dist.dir}/javadoc
+excludes=
+file.reference.ant-antlr.jar=ant-tasks/lib/ant-antlr.jar
+file.reference.ant-apache-bcel.jar=ant-tasks/lib/ant-apache-bcel.jar
+file.reference.ant-apache-bsf.jar=ant-tasks/lib/ant-apache-bsf.jar
+file.reference.ant-apache-log4j.jar=ant-tasks/lib/ant-apache-log4j.jar
+file.reference.ant-apache-oro.jar=ant-tasks/lib/ant-apache-oro.jar
+file.reference.ant-apache-regexp.jar=ant-tasks/lib/ant-apache-regexp.jar
+file.reference.ant-apache-resolver.jar=ant-tasks/lib/ant-apache-resolver.jar
+file.reference.ant-commons-logging.jar=ant-tasks/lib/ant-commons-logging.jar
+file.reference.ant-commons-net.jar=ant-tasks/lib/ant-commons-net.jar
+file.reference.ant-jai.jar=ant-tasks/lib/ant-jai.jar
+file.reference.ant-javamail.jar=ant-tasks/lib/ant-javamail.jar
+file.reference.ant-jdepend.jar=ant-tasks/lib/ant-jdepend.jar
+file.reference.ant-jmf.jar=ant-tasks/lib/ant-jmf.jar
+file.reference.ant-jsch.jar=ant-tasks/lib/ant-jsch.jar
+file.reference.ant-junit.jar=ant-tasks/lib/ant-junit.jar
+file.reference.ant-launcher.jar=ant-tasks/lib/ant-launcher.jar
+file.reference.ant-netrexx.jar=ant-tasks/lib/ant-netrexx.jar
+file.reference.ant-nodeps.jar=ant-tasks/lib/ant-nodeps.jar
+file.reference.ant-tasks-lib=ant-tasks/lib/
+file.reference.ant.jar=ant-tasks/lib/ant.jar
+file.reference.junit-4.5.jar=ant-tasks/lib/junit-4.5.jar
+file.reference.main-java=ant-tasks/src
+includes=**
+jar.compress=false
+javac.classpath=\
+    ${file.reference.ant-antlr.jar}:\
+    ${file.reference.ant-apache-bcel.jar}:\
+    ${file.reference.ant-apache-bsf.jar}:\
+    ${file.reference.ant-apache-log4j.jar}:\
+    ${file.reference.ant-apache-oro.jar}:\
+    ${file.reference.ant-apache-regexp.jar}:\
+    ${file.reference.ant-apache-resolver.jar}:\
+    ${file.reference.ant-commons-logging.jar}:\
+    ${file.reference.ant-commons-net.jar}:\
+    ${file.reference.ant-jai.jar}:\
+    ${file.reference.ant-javamail.jar}:\
+    ${file.reference.ant-jdepend.jar}:\
+    ${file.reference.ant-jmf.jar}:\
+    ${file.reference.ant-jsch.jar}:\
+    ${file.reference.ant-junit.jar}:\
+    ${file.reference.ant-launcher.jar}:\
+    ${file.reference.ant-netrexx.jar}:\
+    ${file.reference.ant-nodeps.jar}:\
+    ${file.reference.ant.jar}:\
+    ${file.reference.junit-4.5.jar}
+# Space-separated list of extra javac options
+javac.compilerargs=
+javac.deprecation=false
+javac.source=1.5
+javac.target=1.5
+javac.test.classpath=\
+    ${javac.classpath}:\
+    ${build.classes.dir}:\
+    ${libs.junit.classpath}:\
+    ${libs.junit_4.classpath}
+javadoc.additionalparam=
+javadoc.author=false
+javadoc.encoding=${source.encoding}
+javadoc.noindex=false
+javadoc.nonavbar=false
+javadoc.notree=false
+javadoc.private=false
+javadoc.splitindex=true
+javadoc.use=true
+javadoc.version=false
+javadoc.windowtitle=
+main.class=
+manifest.file=manifest.mf
+meta.inf.dir=${src.dir}/META-INF
+platform.active=default_platform
+run.classpath=\
+    ${javac.classpath}:\
+    ${build.classes.dir}
+# Space-separated list of JVM arguments used when running the project
+# (you may also define separate properties like run-sys-prop.name=value instead of -Dname=value
+# or test-sys-prop.name=value to set system properties for unit tests):
+run.jvmargs=
+run.test.classpath=\
+    ${javac.test.classpath}:\
+    ${build.test.classes.dir}
+source.encoding=UTF-8
+src.dir=${file.reference.main-java}

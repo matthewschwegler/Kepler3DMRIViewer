@@ -1,0 +1,79 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="FileExistenceMonitor" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1280, 828}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[1031, 705]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{515.5, 352.5}">
+    </property>
+    <port name="existingFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[905.0, 370.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <port name="monitoredFileName" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[45.0, 360.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <entity name="Permanent String Constant" class="org.resurgence.actor.PermanentStringConstant">
+        <property name="value" class="ptolemy.data.expr.FileParameter" value="ls">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[240.0, 250.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot; &quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[415.0, 360.0]">
+        </property>
+    </entity>
+    <entity name="Status Checker" class="org.resurgence.actor.StatusChecker">
+        <property name="sleepTime" class="ptolemy.data.expr.Parameter" value="500L">
+        </property>
+        <property name="checkCondition" class="ptolemy.data.expr.StringParameter" value=".*[^(No such file or directory)]\n">
+        </property>
+        <property name="maxChecks" class="ptolemy.data.expr.Parameter" value="-1">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[595.0, 365.0]">
+        </property>
+    </entity>
+    <entity name="Display" class="ptolemy.actor.lib.gui.Display">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[845.0, 270.0]">
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[195.0, 360.0]">
+        </vertex>
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[780.0, 370.0]">
+        </vertex>
+    </relation>
+    <link port="existingFileHandle" relation="relation5"/>
+    <link port="monitoredFileName" relation="relation4"/>
+    <link port="Permanent String Constant.output" relation="relation"/>
+    <link port="Permanent String Constant.trigger" relation="relation4"/>
+    <link port="String Accumulator.parts" relation="relation"/>
+    <link port="String Accumulator.parts" relation="relation4"/>
+    <link port="String Accumulator.whole" relation="relation3"/>
+    <link port="Status Checker.command" relation="relation3"/>
+    <link port="Status Checker.output" relation="relation5"/>
+    <link port="Display.input" relation="relation5"/>
+</class>

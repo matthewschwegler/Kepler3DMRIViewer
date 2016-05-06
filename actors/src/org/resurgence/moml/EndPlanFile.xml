@@ -1,0 +1,150 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="EndPlanFile" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="ExperimentName" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[250.0, 30.0]">
+        </property>
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="{383.279296875, 314.365234375}">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1024, 804}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[775, 681]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{387.5, 340.5}">
+    </property>
+    <port name="parameterList" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 145.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="taskList" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 345.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="planFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[675.0, 345.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="Display" class="ptolemy.actor.lib.gui.Display">
+        <property name="rowsDisplayed" class="ptolemy.data.expr.Parameter" value="10">
+        </property>
+        <property name="columnsDisplayed" class="ptolemy.data.expr.Parameter" value="40">
+        </property>
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[560.0, 500.0]">
+        </property>
+    </entity>
+    <entity name="File Writer" class="org.geon.FileWrite">
+        <!--<property name="fileName" class="ptolemy.data.expr.FileParameter" value="$HOME/.nimrod/experiments/$ExperimentName/$ExperimentName.pln">
+        </property>-->
+        <property name="append" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="confirmOverwrite" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{570.0, 345.0}">
+        </property>
+    </entity>
+    <entity name="String Accumulator" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;\n&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[275.0, 145.0]">
+        </property>
+    </entity>
+    <entity name="String Constant" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="task main">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.BoxedValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="value">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="60">
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{150.0, 245.0}">
+        </property>
+    </entity>
+    <entity name="String Constant2" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="endtask">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.BoxedValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="value">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="60">
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[165.0, 500.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator2" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[340.0, 345.0]">
+        </property>
+    </entity>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[465.0, 345.0]">
+        </vertex>
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[85.0, 345.0]">
+        </vertex>
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="parameterList" relation="relation"/>
+    <link port="taskList" relation="relation2"/>
+    <link port="planFileHandle" relation="relation3"/>
+    <link port="Display.input" relation="relation4"/>
+    <link port="File Writer.input" relation="relation4"/>
+    <link port="File Writer.url" relation="relation3"/>
+    <link port="String Accumulator.parts" relation="relation"/>
+    <link port="String Accumulator.parts" relation="relation5"/>
+    <link port="String Accumulator.parts" relation="relation7"/>
+    <link port="String Accumulator.whole" relation="relation4"/>
+    <link port="String Constant.output" relation="relation5"/>
+    <link port="String Constant.trigger" relation="relation2"/>
+    <link port="String Constant2.output" relation="relation6"/>
+    <link port="String Constant2.trigger" relation="relation2"/>
+    <link port="String Accumulator2.parts" relation="relation2"/>
+    <link port="String Accumulator2.parts" relation="relation6"/>
+    <link port="String Accumulator2.whole" relation="relation7"/>
+</class>

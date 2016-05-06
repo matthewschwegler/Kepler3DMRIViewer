@@ -1,0 +1,29 @@
+<project name="directors" default="jar" basedir="../../">
+  <!-- import the targets from the main build file -->
+  <import file="../../build.xml"/>
+  <property name="name" value="directors"/>
+  
+  <!-- get depends for this module -->
+  <target name="getDependencies">
+    <echo>Building dependencies for directors</echo>  
+    
+    <variable name="cp" action="deserialize" serializeFile=".serialize" />    
+
+    <variable name="cp" action="append">
+      <pathelement location="${modulesdir}/directors/build/directors.jar"/>
+      <pathelement location="${modulesdir}/directors/build/classes"/>
+    </variable>
+
+    <variable name="cp" action="append">
+      <fileset dir="${modulesdir}/directors/lib/jar">
+        <include name="**/*.jar"/>
+      </fileset>
+    </variable>
+    
+    <!-- append any additional classpath needs to the variable here -->
+    
+    <variable name="cp" action="serialize" serializeFile=".serialize" />
+    <echo>Done with dependencies for directors</echo>
+  </target>
+  
+</project>

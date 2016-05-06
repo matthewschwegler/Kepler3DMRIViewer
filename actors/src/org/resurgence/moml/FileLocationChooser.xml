@@ -1,0 +1,266 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="FileLocationChooser" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="NewFileDirectory" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[435.0, 35.0]">
+        </property>
+    </property>
+    <property name="FileNameAddition" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[435.0, 60.0]">
+        </property>
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="{385.0, 315}">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1280, 828}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[1031, 705]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{515.5, 352.5}">
+    </property>
+    <property name="InputFileType" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[720.0, 35.0]">
+        </property>
+    </property>
+    <property name="OutputFileType" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[720.0, 60.0]">
+        </property>
+    </property>
+    <port name="originalFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{35.0, 155.0}">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="inputFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[925.0, 145.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="outputFileName" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[920.0, 535.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="String Replace" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value=".*/">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{230.0, 145.0}">
+        </property>
+    </entity>
+    <entity name="String Accumulator2" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;/&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{755.0, 535.0}">
+        </property>
+    </entity>
+    <entity name="Directory Maker" class="org.resurgence.actor.DirectoryMaker">
+        <property name="Directory name" class="ptolemy.data.expr.StringParameter" value="$NewFileDirectory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[350.0, 440.0]">
+        </property>
+    </entity>
+    <entity name="String Compare" class="ptolemy.actor.lib.string.StringCompare">
+        <property name="function" class="ptolemy.data.expr.Parameter" value="equals">
+        </property>
+        <property name="ignoreCase" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{360.0, 535.0}">
+        </property>
+    </entity>
+    <entity name="Permanent String Constant" class="org.resurgence.actor.PermanentStringConstant">
+        <property name="value" class="ptolemy.data.expr.FileParameter" value="$NewFileDirectory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{150.0, 515.0}">
+        </property>
+    </entity>
+    <entity name="String Replace4" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="/[^/]*$$">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[550.0, 340.0]">
+        </property>
+    </entity>
+    <entity name="Boolean Multiplexor" class="ptolemy.actor.lib.BooleanMultiplexor">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[550.0, 440.0]">
+        </property>
+    </entity>
+    <entity name="File Copy" class="org.geon.FileCopy">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[745.0, 235.0]">
+        </property>
+    </entity>
+    <entity name="String Replace5" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="^file:">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[750.0, 145.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;/&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[750.0, 340.0]">
+        </property>
+    </entity>
+    <entity name="String Replace6" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="\.[^\.]*$$">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="replacement" class="ptolemy.actor.parameters.PortParameter" value="${FileNameAddition}.${InputFileType}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[550.0, 135.0]">
+        </property>
+    </entity>
+    <entity name="String Replace3" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="\.[^\.]*$$">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="replacement" class="ptolemy.actor.parameters.PortParameter" value="${FileNameAddition}.${OutputFileType}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{360.0, 610.0}">
+        </property>
+    </entity>
+    <entity name="String Replace2" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="^file:">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[355.0, 350.0]">
+        </property>
+    </entity>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[30.0, 225.0]">
+        </vertex>
+    </relation>
+    <relation name="relation11" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation12" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation10" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation13" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation14" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="{650.0, 440.0}">
+        </vertex>
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[115.0, 275.0]">
+        </vertex>
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="originalFileHandle" relation="relation4"/>
+    <link port="inputFileHandle" relation="relation10"/>
+    <link port="outputFileName" relation="relation8"/>
+    <link port="String Replace.stringToEdit" relation="relation4"/>
+    <link port="String Replace.output" relation="relation6"/>
+    <link port="String Accumulator2.parts" relation="relation14"/>
+    <link port="String Accumulator2.parts" relation="relation"/>
+    <link port="String Accumulator2.whole" relation="relation8"/>
+    <link port="Directory Maker.trigger" relation="relation4"/>
+    <link port="Directory Maker.path" relation="relation12"/>
+    <link port="String Compare.firstString" relation="relation13"/>
+    <link port="String Compare.output" relation="relation5"/>
+    <link port="Permanent String Constant.output" relation="relation13"/>
+    <link port="Permanent String Constant.trigger" relation="relation4"/>
+    <link port="String Replace4.stringToEdit" relation="relation3"/>
+    <link port="String Replace4.output" relation="relation11"/>
+    <link port="Boolean Multiplexor.trueInput" relation="relation11"/>
+    <link port="Boolean Multiplexor.falseInput" relation="relation12"/>
+    <link port="Boolean Multiplexor.select" relation="relation5"/>
+    <link port="Boolean Multiplexor.output" relation="relation14"/>
+    <link port="File Copy.sourceFile" relation="relation4"/>
+    <link port="File Copy.destinationFile" relation="relation7"/>
+    <link port="File Copy.outputFile" relation="relation9"/>
+    <link port="String Replace5.stringToEdit" relation="relation9"/>
+    <link port="String Replace5.output" relation="relation10"/>
+    <link port="String Accumulator.parts" relation="relation14"/>
+    <link port="String Accumulator.parts" relation="relation2"/>
+    <link port="String Accumulator.whole" relation="relation7"/>
+    <link port="String Replace6.stringToEdit" relation="relation6"/>
+    <link port="String Replace6.output" relation="relation2"/>
+    <link port="String Replace3.stringToEdit" relation="relation6"/>
+    <link port="String Replace3.output" relation="relation"/>
+    <link port="String Replace2.stringToEdit" relation="relation4"/>
+    <link port="String Replace2.output" relation="relation3"/>
+</class>

@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE plot PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="DDBJ" class="ptolemy.moml.EntityLibrary">
+  <configure>
+    <?moml
+      <group>
+  <doc>GetEntry Actors for biology from Japan</doc>
+ 
+   <entity name="getFFEntry" class="org.sdm.spa.WebServiceActor">
+	<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="http://tempuri.org/DDBJ">
+    </property>	
+	<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://xml.nig.ac.jp/xddbj/DDBJ">
+    </property>	
+	<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="">
+    </property>	
+	<property name="password" class="ptolemy.kernel.util.StringAttribute" value="">
+    </property>	
+    <property name="method" class="ptolemy.kernel.util.StringAttribute" value="getFFEntry">
+    </property> 
+    <property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="accession">
+    </property>
+  </entity>  
+  
+  <entity name="getXMLEntry" class="org.sdm.spa.WebServiceActor">
+	<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="http://tempuri.org/DDBJ">
+    </property>	
+	<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://xml.nig.ac.jp/xddbj/DDBJ">
+    </property>	
+	<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="">
+    </property>	
+	<property name="password" class="ptolemy.kernel.util.StringAttribute" value="">
+    </property>	
+    <property name="method" class="ptolemy.kernel.util.StringAttribute" value="getXMLEntry">
+    </property> 
+    <property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="accession">
+    </property>
+  </entity>  
+      </group>
+    ?>
+  </configure>
+</entity>

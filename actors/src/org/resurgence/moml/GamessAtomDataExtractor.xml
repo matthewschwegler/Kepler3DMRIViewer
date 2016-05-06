@@ -1,0 +1,141 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="GamessAtomDataExtractor" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="4.0.1">
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="{485.0, 310.0}">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1024, 742}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[775, 619]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{387.5, 309.5}">
+    </property>
+    <port name="gamessDataGroupHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 140.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="gamessAtomData" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[660.0, 350.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="String Index Of" class="ptolemy.actor.lib.string.StringIndexOf">
+        <property name="searchFor" class="ptolemy.actor.parameters.PortParameter" value=" $$DATA">
+        </property>
+        <property name="ignoreCase" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="startIndex" class="ptolemy.actor.parameters.PortParameter" value="0">
+        </property>
+        <property name="searchForwards" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[555.0, 190.0]">
+        </property>
+    </entity>
+    <entity name="String Substring" class="ptolemy.actor.lib.string.StringSubstring">
+        <property name="start" class="ptolemy.actor.parameters.PortParameter" value="0">
+        </property>
+        <property name="stop" class="ptolemy.actor.parameters.PortParameter" value="-1">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[690.0, 140.0]">
+        </property>
+    </entity>
+    <entity name="Simple File Reader" class="org.resurgence.actor.SimpleFileReader">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[385.0, 130.0]">
+        </property>
+    </entity>
+    <entity name="String Index Of2" class="ptolemy.actor.lib.string.StringIndexOf">
+        <property name="searchFor" class="ptolemy.actor.parameters.PortParameter" value="END">
+        </property>
+        <property name="ignoreCase" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="startIndex" class="ptolemy.actor.parameters.PortParameter" value="0">
+        </property>
+        <property name="searchForwards" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[250.0, 445.0]">
+        </property>
+    </entity>
+    <entity name="String Substring2" class="ptolemy.actor.lib.string.StringSubstring">
+        <property name="start" class="ptolemy.actor.parameters.PortParameter" value="0">
+        </property>
+        <property name="stop" class="ptolemy.actor.parameters.PortParameter" value="0">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[365.0, 360.0]">
+        </property>
+    </entity>
+    <entity name="String Replace" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="^ \$$DATA.*\n.*\n.*(\n\n|\n)">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[120.0, 350.0]">
+        </property>
+    </entity>
+    <entity name="String Replace2" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="\n \$$.*">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[530.0, 350.0]">
+        </property>
+    </entity>
+    <entity name="String Replace3" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value="^file:">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{270.0, 130.0}">
+        </property>
+    </entity>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="{465.0, 130.0}">
+        </vertex>
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[185.0, 350.0]">
+        </vertex>
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="gamessDataGroupHandle" relation="relation9"/>
+    <link port="gamessAtomData" relation="relation4"/>
+    <link port="String Index Of.inText" relation="relation5"/>
+    <link port="String Index Of.output" relation="relation"/>
+    <link port="String Substring.input" relation="relation5"/>
+    <link port="String Substring.output" relation="relation3"/>
+    <link port="String Substring.start" relation="relation"/>
+    <link port="Simple File Reader.file" relation="relation2"/>
+    <link port="Simple File Reader.content" relation="relation5"/>
+    <link port="String Index Of2.inText" relation="relation8"/>
+    <link port="String Index Of2.output" relation="relation7"/>
+    <link port="String Substring2.input" relation="relation8"/>
+    <link port="String Substring2.output" relation="relation6"/>
+    <link port="String Substring2.stop" relation="relation7"/>
+    <link port="String Replace.stringToEdit" relation="relation3"/>
+    <link port="String Replace.output" relation="relation8"/>
+    <link port="String Replace2.stringToEdit" relation="relation6"/>
+    <link port="String Replace2.output" relation="relation4"/>
+    <link port="String Replace3.stringToEdit" relation="relation9"/>
+    <link port="String Replace3.output" relation="relation2"/>
+</class>

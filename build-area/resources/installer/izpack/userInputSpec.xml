@@ -1,0 +1,11 @@
+<userInput>
+  <!-- Install -->
+    <panel order="0">
+	<field type="check" variable="startKepler">
+	  <spec txt="Start Kepler next?" true="true" false="false" set="true"/>
+	</field>
+    <field type="staticText" align="left"
+        txt="Kepler may take a few minutes to start the first time since the actor library needs to be built."
+    /> 
+    </panel>
+</userInput>

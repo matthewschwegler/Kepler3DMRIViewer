@@ -1,0 +1,4 @@
+method = scp
+platform = common
+source = results/kepler-1.xDev-win.jar
+dest = webuser@ceres.nceas.ucsb.edu:/var/www/org.kepler-project.www/dist/nightly/.

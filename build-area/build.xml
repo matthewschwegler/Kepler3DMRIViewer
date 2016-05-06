@@ -1,0 +1,830 @@
+<project name="kepler" basedir=".." default="help">
+
+  <import file="settings/build-properties.xml" />
+  <import file="settings/taskdefs.xml" />
+
+  <!--=================-->
+  <!-- Developer Tasks -->
+  <!--=================-->
+
+  <target name="run" depends="compile" description="Compile, then run Kepler along with the modules in modules.txt.  Use -Dworkflow=model.xml to run a model.">
+    <run location="${basedir}" suite="${suite}" module="${module}" main="${main}" args="${args}" workflow="${workflow}" properties="${properties}" jvmMaxMemory="${max}" jvmMinMemory="${min}" debug="${debug}"/>
+  </target>
+
+  <target name="ivy" description="Retrieves any necessary ivy dependencies.">
+    <ivy />
+  </target>
+  
+  <target name="maven" description="Retrieves any maven dependencies.">
+    <maven />
+  </target>
+
+  <target name="add-search-url">
+    <add-search-url url="${url}" />
+  </target>
+
+  <target name="list-search-urls">
+    <list-search-urls />
+  </target>
+
+  <target name="remove-search-url">
+    <remove-search-url number="${number}" />
+  </target>
+
+  <target name="list-modules" description="Lists all the module through modules.txt.">
+    <list-modules test="${test}" />
+  </target>
+
+  <target name="describe" description="Outputs the value of description.txt associated with the module in question.">
+    <describe-module module="${module}" />
+  </target>
+
+  <target name="report-overrides" description="Reports all the Java source code overrides in the current suite.">
+    <report-overrides />
+  </target>
+
+  <target name="report-dependencies" description="Reports all of the dependencies in a particular suite of modules.">
+    <report-dependencies />
+  </target>
+
+  <target name="get" description="Get the suite or module specified by -Dsuite=suite.name or -Dmodule=module.name.">
+    <get-modules suite="${suite}" module="${module}" test="${test}" />
+  </target>
+
+  <target name="compile" description="Compile all the modules in modules.txt. Use -Ddepend=true for dependency analysis.">
+    <echo>Note that you may need to run "ant force-ptolemy compile" to compile ptolemy.</echo>
+    <compile module="${module}" compilerArgs="${compiler-args}" debug="${debug}" include="${include}" exclude="${exclude}" skip="${skip}" depend="${depend}" dependClasspath="${depend-classpath}" dependClosure="${depend-closure}" />
+  </target>
+
+
+  <target  name="runner">
+    <runner runModuleManager="${run-module-manager}" />
+  </target>
+
+  <target name="run-only" description="The same as run, but do not compile first.">
+    <run suite="${suite}" module="${module}" main="${main}" args="${args}" workflow="${workflow}" properties="${properties}" jvmMaxMemory="${max}" jvmMinMemory="${min}" debug="${debug}"/>
+  </target>
+
+  <target name="run-workflow" depends="compile" description="Run Kepler from the command-line on a particular workflow. Enable both gui and cache.">
+    <run module="${module}" main="${main}" workflow="${workflow}" properties="${properties}" jvmMaxMemory="${max}" jvmMinMemory="${min}" />
+  </target>
+
+  <target name="run-workflow-no-gui-server" depends="compile" description="Run Kepler from the command-line on a particular workflow. Disable the GUI but enable the cache. Save the execution results to the server repository.">
+    <!-- same as command: ./kepler.sh  -runwf -nogui -server -repository=keplerRepository ../provenance.kar -->
+    <run module="${module}" main="${main}" args="-runwf -nogui -server -repository=${repository}" workflow="${workflow}" properties="${properties}" jvmMaxMemory="${max}" jvmMinMemory="${min}" />
+  </target>
+ 
+  <target name="test" depends="compile,test-junit,test-workflows" description="Run the junit and workflow tests."/>
+
+  <target name="test-junit" depends="compile" description="Run all the JUnit tests defined in the modules listed in modules.txt.  If you just want to run one test from a module, set the name equal to the full classname of the test.">
+    <mkdir dir="build-area/tests"/> 
+    <delete>
+        <fileset dir="build-area/tests" includes="junit*.*"/>
+    </delete>
+    <test name="${name}" module="${module}" fastfail="${fastfail}"/>
+  </target>
+
+  <target name="test-workflows" description="Run the workflows tests. Use -Dmodule=name to test the workflows in a specific module.">
+    <mkdir dir="build-area/tests"/> 
+    <echo>Deleting build-area/tests/workflows*.xml</echo>
+    <delete>
+        <fileset dir="build-area/tests" includes="workflows*.xml"/>
+    </delete>
+    <test-workflows module="${module}" fastfail="${fastfail}"
+        testActors="${testActors}" testLoadDemos="${testLoadDemos}"
+        timeout="${timeout}"/>
+  </target>
+
+  <target name="jar" depends="compile" description="Create one jar file per module.">
+    <jar-modules module="${module}"/>
+  </target>
+
+  <target name="change-to" description="Change modules.txt to reflect the contents of a particular suite. Get any modules that are not already present.  For example, 'ant change-to -Dsuite=kepler'.">
+    <change-to suite="${suite}" under="${under}" branch="${branch}" ptolemyBranch="${ptolemyBranch}" test="${test}" />
+  </target>
+
+  <target name="package" description="Create a zip with an executable jar for a particular defined suite.">
+    <package suite="${suite}" name="${name}" />
+  </target>
+
+  <target name="deploy" description="Create a jar with a collapsed module hierarchy for a defined suite.">
+    <deploy suite="${suite}" name="${name}" />
+      <pathconvert property="libs.project" pathsep=" ">
+          <map from="${basedir}/${name}/" to="" />
+          <path>
+              <!-- lib.home contains all jar files, in several subdirectories -->
+              <fileset dir="${name}/lib">
+                  <include name="**/*.jar" />
+              </fileset>
+          </path>
+      </pathconvert>
+      <!-- create the jar -->
+      <jar jarfile="${name}/${name}.jar" basedir="${name}/target/classes">
+          <manifest>
+              <attribute name="Built-By" value="${user.name}" />
+              <attribute name="Main-Class" value="ptolemy.moml.MoMLCommandLineApplication" />
+              <!-- Finally, use the generated libs path -->
+              <attribute name="Class-Path" value="${libs.project}" />
+          </manifest>
+      </jar>
+      <!-- <delete dir="${name}/target"/> -->
+  </target>
+
+  <target name="clean" description="Delete the target directory (which contains compiled class files) for all the modules listed in modules.txt.">
+    <clean module="${module}" />
+  </target>
+
+  <target  name="clean-classes">
+    <clean-classes/>
+  </target>
+
+  <target name="clean-dot-kepler">
+    <clean-dot-kepler/>
+  </target>
+
+  <target name="clean-all" depends="clean, clean-cache, clean-jar, clean-kar, clean-tests, clean-dot-kepler, clean-installers" description="Clean everything except IDEs: target, cache, jar, kar, tests, installer . . .">
+  </target>
+
+  <target name="clean-ides" depends="clean-eclipse, clean-idea, clean-netbeans" description="Clean all of the IDE files for Eclipse, Netbeans, and Intellij IDEA.">
+  </target>
+
+  <target name="clean-cache" depends="clean-kar" description="Delete the .kepler cache and delete the kar files.">
+    <clean-cache/>
+  </target>
+
+  <target name="clean-jar" description="Delete the jar files that have been generated for the modules listed in modules.txt">
+    <clean-jar />
+  </target>
+
+  <target name="clean-kar" description="Delete any kar folders in any module in modules.txt.">
+    <clean-kar />
+  </target>
+
+  <target name="clean-tests" description="Cleans the compiled test classes.">
+    <clean module="all" testsOnly="true" />
+  </target>
+
+  <target name="clean-installers" description="Cleans installers.">
+    <delete dir="../finished-kepler-installers"/> 
+  </target>
+
+  <target name="idea" description="Generate a project for Intellij IDEA that works with the modules listed in modules.txt">
+    <idea />
+  </target>
+
+  <target name="clean-idea" description="Delete the project files generated by the 'ant idea' command.">
+    <clean-idea />
+  </target>
+
+  <target name="eclipse" description="Generate a project for Eclipse that works with the modules listed in modules.txt.">
+    <eclipse />
+  </target>
+
+  <target name="clean-eclipse" description="Delete the project files generated by the 'ant eclipse' command.">
+    <clean-eclipse />
+  </target>
+
+  <target name="netbeans" description="Generates a project for Netbeans that works with the modules listed in modules.txt.">
+    <netbeans />
+  </target>
+
+  <target name="clean-netbeans" description="Delete the project files generated by the 'ant netbeans' command.">
+    <clean-netbeans />
+  </target>
+
+  <target name="make-suite" description="Make a suite which contains information on a set of modules that are meant to work together.">
+    <make-suite name="${name}" />
+  </target>
+  
+  <target name="status" description="Run svn status on all the modules listed in modules.txt.">
+    <status-modules/>
+  </target>
+  
+  <target name="diff" description="Run svn diff on all the modules listed in modules.txt.">
+    <diff-modules/>
+  </target>
+
+  <target name="make-module" description="Make a module that contains source code and/or resources.">
+    <make-module name="${name}" />
+  </target>
+
+  <target name="make-module-suite" description="Make a hybrid module suite.">
+    
+    <make-module-suite name="${name}" />
+  </target>
+
+  <target name="register-module-location" description="Add a custom location for a module in the module registry.">
+    <register-module-location name="${name}" location="${location}" />
+  </target>
+
+  <target name="update" description="Runs svn update on all the modules listed in modules.txt.">
+    <update-modules revision="${rev}" date="${date}" include="${include}" exclude="${exclude}" skip="${skip}" />
+  </target>
+  
+  <target name="update-all" description="Runs svn update on all the modules in your kepler.modules directory.">
+    <update-all  revision="${rev}" date="${date}" />
+  </target>
+
+  <target name="update-released-txt" description="Updates released.txt so that it contains the latest published versions.">
+    <update-released-txt />
+  </target>
+
+  <target name="update-present-txt" description="Updates present.txt so that it contains the latest present versions.">
+    <update-present-txt />
+  </target>
+
+  <target name="upload" description="Upload a module or a suite. If the module name ends with 'branch', 'tag-checkpoint', or 'tag-release' it will go into the appropriate location. Otherwise, it will go in the trunks area.">
+    <upload-module module="${module}" suite="${suite}" />
+  </target>
+
+  <target name="javadoc" description="Create javadoc for all the modules in modules.txt.">
+    <create-javadoc module="${module}" />
+  </target>
+
+  <target name="clean-startup-scripts">
+    <delete file="kepler.sh"/>
+    <delete file="kepler.bat"/>
+    <delete file="kepler.jar"/>
+  </target>
+
+  <target name="tag">
+    <tag module="${module}" name="${name}" />
+  </target>
+
+  <target name="branch">
+    <branch module="${module}" version="${version}"/>
+  </target>
+
+  <target name="branch-main">
+    <branch-main module="${module}" version="${version}"/>
+  </target>
+
+  <target name="print-branch-commands" description="Print out commands for branching, and creating and deleting test releases of modules. Use ant -e to silence ant adornments, -Dincrement=true to increment the minor version for each module.">
+    <print-branch-commands increment="${increment}"/>
+  </target>
+
+  <target name="publish-ptolemy">
+    <publish-ptolemy version="${version}"/>
+  </target>
+
+  <target name="patch">
+    <patch-module module="${module}" suite="${suite}" test="${test}"/>
+  </target>
+  
+  <target name="show-lsids">
+    <show-lsids />
+  </target>
+
+  <target name="update-actor-doc" description="Update actor documentation. Specify -Dmodule=name to update a single module.">
+    <run args="${module}" main="org.kepler.loader.util.UpdateActorTreeFiles"/>
+  </target>
+  
+  <target name="find-missing-actors" description="Find actors, directors, and attributes not in the actor tree. Specify -Dmodule=name to update a single module.">
+    <run args="${module}" main="org.kepler.loader.util.FindMissingActors"/>
+  </target>
+
+  <!--=============-->
+  <!-- Query Tasks -->
+  <!--=============-->
+  <target name="suite?">
+    <what-suite/>
+  </target>
+  
+  <!--==================-->
+  <!-- Management Tasks -->
+  <!--==================-->
+
+  <target name="make-installers" depends="make-linux-installer,make-mac-installer,make-windows-installer"
+          description="Builds installers for Linux, Mac OS X, Windows"/>
+
+  <!-- NOTE: each of the installer targets call build-area/use.keplerdata
+       when it is done. If this is not done, then the next installer built
+       may not have the correct contents.
+  !-->
+
+  <target name="make-debian-package" description="Builds a Debian package.">
+    <make-debian-package appname="${appname}" 
+        version="${version}" 
+        installdir="${installdir}"
+        homepage="${homepage}"    
+    />
+    <antcall target="remove-use-keplerdata"/>
+  </target>
+
+  <target name="make-zip" description="Creates a zip file of the current suite.">
+    <antcall target="make-linux-installer">
+        <param name="zip" value="true" />
+    </antcall>
+  </target>
+
+  <target name="make-linux-installer" description="Builds an installer for Linux">
+    <make-linux-installer appname="${appname}" version="${version}" zip="${zip}"/>
+    <antcall target="remove-use-keplerdata"/>
+  </target>
+
+  <target name="make-mac-installer" description="Builds an .app for Mac OS X">
+    <make-macosx-installer appname="${appname}" version="${version}"/>
+    <antcall target="remove-use-keplerdata"/>
+  </target>
+
+  <target name="make-windows-installer" description="Make an installer for Windows">
+    <make-windows-installer appname="${appname}" version="${version}"/>
+    <antcall target="remove-use-keplerdata"/>
+  </target>
+
+  <target name="remove-use-keplerdata" description="Removes use.keplerdata">
+    <delete file="build-area/use.keplerdata"/>
+  </target>
+  
+  <target name="build-test">
+    <build-test/>
+  </target>
+
+  <target name="get-all" description="Gets all the modules referred to by any suite and stores them in your kepler.modules directory.">
+    <get-all-modules />
+  </target>
+
+  <target name="report-all-overrides" description="Reports about all the overrides for all the suites in your kepler.modules directory.">
+    <report-all-overrides />
+  </target>
+
+  <target name="list-suites" description="Lists all of the suites that have been retrieved.">
+    <list-suites />
+  </target>
+  
+  <target name="validate-ptolemy" description="Tests the current version of Kepler against the current version of Ptolemy and changes the validated ptolemy revision if appropriate.">
+    <validate-ptolemy />
+  </target>
+  
+  <target name="release" description="Publish the module, making it available in the Module Manager GUI">
+    <publish module="${module}" suite="${suite}" referencePatches="${reference-patches}" test="${test}" testRelease="${test-release}"/>
+  </target>
+
+  <target name="find" description="Report all downloaded modules in which the particular class is found.">
+    <find class="${class}"/>
+  </target>
+  
+  <target name="update-ptolemy" description="Usage: update-ptolemy -Drev={head|stable}. Updated ptolemy to the head or to the latest stable version.">
+    <update-ptolemy revision="${rev}" />
+  </target>
+  
+  <target name="upgrade-kepler-tasks" description="Upgrade the kepler-tasks.jar used by the module-manager module. To update lib/kepler-tasks.jar, run ant -f kepler-tasks.xml.">
+    <upgrade-kepler-tasks/>
+  </target>
+  
+  <target name="make-kars" description="Management task to induce the creation of kars from the build system.">
+    <make-kars/>
+  </target>
+
+  <target name="force-ptolemy" description="Compiles everything in the current suite, including and especially ptolemy.">
+    <force-ptolemy  module="${module}" compilerArgs="${compiler-args}" debug="${debug}" include="${include}" exclude="${exclude}" skip="${skip}"/>
+  </target>
+  
+  <target name="analyze-jars" description="Analyze the jars in the current suite and identify overlap">
+    <analyze-jars keyType="checksum" logfile="build-area/analyze-jars-checksum.txt"/>
+    <analyze-jars keyType="filename" keyLength="6"  logfile="build-area/analyze-jars-filename.txt"/>
+  </target>
+
+  <target name="format" description="Formats all the source in modules.txt according to Sun conventions.">
+    <format/>
+  </target>
+
+  <!-- creates the .bat and .sh laucher scripts for kepler -->
+  <target name="make-startup-scripts" description="Builds the .sh and .bat files to execute Kepler with.">
+    <make-startup-scripts/>
+  </target>
+
+  <target  name="change-splash-screen" description="Changes the version number displays by the Kepler splash and about screens.">
+    <change-splash-screen version="${version}"/>
+  </target>
+  
+  <target name="update-copyright" description="update the copyright statements in the source files.  WARNING: this task has the ability to change a large number source files.  Use it with care.">
+    <update-copyright copyrightFile="${copyrightFile}" copyrightYear="${copyrightYear}" 
+    		      file="${file}" dryRun="${dryRun}" module="${module}" tests="${tests}"/>
+  </target>
+  
+  <!-- builds the nmi configuration files for an NMI nightly build for the current suite -->
+  <target name="nmi" depends="change-to" description="builds the nmi configuration files for an NMI nightly build for the current suite">
+    <nmi project="kepler" component="${suite}" componentVersion="${suite}-trunk"
+         description="Build for the suite ${suite}"
+         runType="build" platforms="x86_macos_10.4, x86_fc_5" 
+         prereqs="prereqs:apache-ant-1.7.0, prereqs_x86_fc_5:java-1.5.0_08, prereqs_x86_macos_10.4:java-1.5.0_06"
+         notify="kepler-nightly@kepler-project.org" 
+         overwrite="true"/>
+  </target>
+
+  <target name="findbugs" description="Run FindBugs on the current suite.">
+    <property name="findbugs.home" value="${basedir}/build-area/findbugs"/>
+    <property name="effort" value="max"/>
+    <property name="excludefilter" value="${basedir}/build-area/settings/findbugs-excludes.xml"/>
+    <property name="jvmargs" value="-Xms256m -Xmx1024m"/>
+    <property name="output" value="-xml"/>
+    <property name="outputfile" value="${basedir}/findbugs.xml"/>
+    <property name="findbugs.timeout" value="1200000"/>
+    <echo>NOTE: findbugs must be installed in ${findbugs.home}</echo>
+    <taskdef name="findbugs" 
+             classname="org.kepler.build.FindBugs"
+             classpath="build-area/target/kepler-tasks.jar" />
+    <findbugs 
+       debug="${debug}"
+       effort="${effort}"
+       excludefilter="${excludefilter}"
+       home="${findbugs.home}"
+       jvmargs="${jvmargs}"
+       output="${output}"
+       outputFile="${outputfile}"
+       timeout="${findbugs.timeout}"
+       />
+  </target>
+
+  <target name="cpd" description="Run CPD on the current suite.">
+    <property name="cpd.home" value="${basedir}/build-area/pmd-bin-5.1.1"/>
+    <property name="jvmargs" value="-Xms256m -Xmx1024m"/>
+    <property name="minTokens" value="100"/>
+    <property name="outputfile" value="${basedir}/cpd.xml"/>
+    <echo>NOTE: CPD/PMD must be installed in ${cpd.home}</echo>
+    <taskdef name="cpd" 
+             classname="org.kepler.build.CPD"
+             classpath="build-area/target/kepler-tasks.jar" />
+    <cpd 
+       home="${cpd.home}"
+       jvmargs="${jvmargs}"
+       outputFile="${outputfile}"
+       minTokens="${minTokens}"
+       />
+  </target>
+
+
+  <!-- clean up from the build-ptolemy-execution-engine task -->
+  <target name="clean-ptee" description="clean up from the build-ptolemy-execution-engine task">
+    <delete dir="ptII-exe"/>
+    <delete dir="ptII-actors"/>
+  </target>
+  
+  <!-- create, compile and jar a version of ptII that only includes the execution engine -->
+  <target name="build-ptolemy-execution-engine">
+    <mkdir dir="ptII-exe"/>
+    <mkdir dir="ptII-exe/src"/>
+    <mkdir dir="ptII-exe/target"/>
+    <mkdir dir="ptII-exe/target/classes"/>
+    
+    <mkdir dir="ptII-actors"/>
+    <mkdir dir="ptII-actors/src"/>
+    <mkdir dir="ptII-actors/target"/>
+    <mkdir dir="ptII-actors/target/classes"/>
+    
+    <!-- copy all of the needed kernel packages -->
+    <copy todir="ptII-exe/src" includeEmptyDirs="false">
+      <fileset dir="ptolemy">
+        <include name="com/microstar/**/*.java"/>
+        <include name="ptolemy/actor/*.java"/>
+        <include name="ptolemy/actor/util/*.java"/>
+        <include name="ptolemy/actor/parameters/*.java"/>
+        <include name="ptolemy/actor/sched/*.java"/>
+        <include name="ptolemy/data/**/*.java"/>
+        <include name="ptolemy/graph/**/*.java"/>
+        <include name="ptolemy/kernel/**/*.java"/>
+        <include name="ptolemy/math/**/*.java"/>
+        <include name="ptolemy/moml/**/*.java"/>
+        <include name="ptolemy/util/**/*.java"/>
+        
+        <exclude name="com/microstar/xml/demo/**/*.*"/>
+        <exclude name="ptolemy/data/properties/**/*.*"/>
+        <exclude name="ptolemy/kernel/util/test/**/*.*"/>
+        <exclude name="ptolemy/moml/filter/test/**/*.*"/>
+        <exclude name="ptolemy/moml/test/**/*.*"/>
+        <exclude name="ptolemy/math/test/**/*.*"/>
+        <exclude name="ptolemy/util/test/**/*.*"/>
+        <exclude name="ptolemy/graph/test/**/*.*"/>
+        <exclude name="ptolemy/kernel/test/**/*.*"/>
+        <exclude name="ptolemy/moml/jxta/**/*.*"/>
+        <exclude name="ptolemy/data/expr/test/**/*.*"/>
+        <exclude name="ptolemy/kernel/undo/test/**/*.*"/>
+        <exclude name="ptolemy/data/type/test/**/*.*"/>
+      </fileset>
+    </copy>
+    
+    <copy todir="ptII-exe/src">
+      <fileset dir="loader">
+        <include name="src/org/kepler/ExecutionEngine.java"/>
+      </fileset> 
+    </copy>
+    
+    <!-- copy the actors packages -->
+    <copy todir="ptII-actors/src">
+      <fileset dir="ptolemy">
+        <include name="ptolemy/actor/**/*.java"/>
+        <include name="ptolemy/gui/**/*.java"/>
+        <include name="ptolemy/plot/**/*.java"/>
+        <include name="ptolemy/domains/sdf/kernel/**/*.java"/>
+        <include name="ptolemy/domains/pn/kernel/**/*.java"/>
+        
+        <exclude name="ptolemy/actor/gt/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/colt/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/database/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/properties/GUIAction.java"/>
+        <exclude name="ptolemy/actor/gui/properties/ActionGUIProperty.java"/>
+        <exclude name="ptolemy/actor/gui/ptjacl/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/properties/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/python/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/run/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/test/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/embeddedJava/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/image/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/io/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/javasound/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jmf/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jni/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/joystick/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/js/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jxta/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jmf/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/logic/fuzzy/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/python/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/x10/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/string/test/**/*.*"/>
+        <exclude name="ptolemy/actor/ptalon/**/*.*"/>
+        <exclude name="ptolemy/gui/test/**/*.*"/>
+        <exclude name="ptolemy/plot/servlet/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/jnlp/**/*.*"/>
+        <exclude name="ptolemy/actor/util/test/**/*.*"/>
+        <exclude name="ptolemy/actor/test/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/test/**/*.*"/>
+        <exclude name="ptolemy/actor/process/test/**/*.*"/>
+        <exclude name="ptolemy/actor/parameters/test/**/*.*"/>
+      </fileset>
+    </copy>
+    
+    <!-- compile the packages -->
+    <javac srcdir="ptII-exe/src" destdir="ptII-exe/target/classes"/>
+    <javac srcdir="ptII-actors/src" destdir="ptII-actors/target/classes"
+	   classpath="ptII-exe/target/classes"/>
+    
+    <!-- create the jar file -->
+    <jar destfile="ptII-exe/target/ptII-exe.jar" basedir="ptII-exe/target/classes" />
+    <jar destfile="ptII-actors/target/ptII-actors.jar" basedir="ptII-actors/target/classes" />
+    
+    <!--
+	Once this task is run, you can try out the executionEngine either with the 
+	junit test or with the following command:
+	
+	java -classpath 
+	ptII-exe/target/ptII-exe.jar:ptII-actors/target/ptII-actors.jar:util/target/util.jar:common/lib/jar/sms/commons-logging.jar 
+	org.kepler.ExecutionEngine 
+	/Users/berkley/project/kepler/loader/resources/test/test-model-1.xml
+	
+      -->
+    
+  </target>
+
+  <!-- create, compile and jar a version of ptII that only includes the execution engine and a seperate jar for actors-->
+  <target name="build-ptolemy-lite">
+    <mkdir dir="ptII-lite-exe"/>
+    <mkdir dir="ptII-lite-exe/src"/>
+    <mkdir dir="ptII-lite-exe/target"/>
+    <mkdir dir="ptII-lite-exe/target/classes"/>
+
+    <mkdir dir="ptII-lite-actors"/>
+    <mkdir dir="ptII-lite-actors/src"/>
+    <mkdir dir="ptII-lite-actors/target"/>
+    <mkdir dir="ptII-lite-actors/target/classes"/>
+
+    <!-- copy all of the needed kernel packages -->
+    <copy todir="ptII-lite-exe/src" includeEmptyDirs="false">
+      <fileset dir="ptolemy">
+        <include name="lib/*.jar"/>
+        <include name="com/microstar/**/*.java"/>
+        <include name="diva/util/java2d/svg/*.java"/>
+        <include name="ptolemy/actor/*.java"/>
+        <include name="ptolemy/actor/util/*.java"/>
+        <include name="ptolemy/actor/parameters/*.java"/>
+        <include name="ptolemy/actor/sched/*.java"/>
+        <include name="ptolemy/data/**/*.java"/>
+        <include name="ptolemy/graph/**/*.java"/>
+        <include name="ptolemy/kernel/**/*.java"/>
+        <include name="ptolemy/math/**/*.java"/>
+        <include name="ptolemy/moml/**/*.java"/>
+        <include name="ptolemy/util/**/*.java"/>
+        <include name="ptolemy/vergil/actor/**/*.java"/>
+        <include name="ptolemy/vergil/basic/**/*.java"/>
+        <include name="ptolemy/vergil/icon/**/*.java"/>
+        <include name="ptolemy/vergil/tree/**/*.java"/>
+        <include name="ptolemy/vergil/toolbox/**/*.java"/>
+        <include name="ptolemy/vergil/kernel/**/*.java"/>
+        <include name="ptolemy/vergil/unit/**/*.java"/>
+	<!-- <include name="ptolemy/vergil/*.java"/> -->
+        <include name="ptolemy/vergil/VergilApplication.java"/>
+        <include name="ptolemy/vergil/VergilErrorHandler.java"/>
+	<!-- <include name="ptolemy/actor/gui/*.java"/> -->
+        <include name="ptolemy/gui/*.java"/>
+        <include name="ptolemy/actor/gui/Effigy.java"/>
+        <include name="ptolemy/actor/gui/EffigyFactory.java"/>
+        <include name="ptolemy/actor/gui/MoMLApplication.java"/>
+        <include name="ptolemy/actor/gui/ModelDirectory.java"/>
+        <include name="ptolemy/actor/gui/PtolemyEffigy.java"/>
+        <include name="ptolemy/actor/gui/PtolemyPreferences.java"/>
+        <include name="ptolemy/actor/gui/UserActorLibrary.java"/>
+        <include name="ptolemy/actor/gui/Configuration.java"/>
+        <include name="ptolemy/actor/gui/DebugListenerTableau.java"/>
+        <include name="ptolemy/actor/gui/DialogTableau.java"/>
+        <include name="ptolemy/actor/gui/OpenInstanceDialog.java"/>
+        <include name="ptolemy/actor/gui/Tableau.java"/>
+        <include name="ptolemy/actor/gui/TableauFrame.java"/>
+        <include name="ptolemy/actor/gui/TextEffigy.java"/>
+        <include name="ptolemy/actor/gui/UserActorLibrary.java"/>
+        <include name="ptolemy/vergil/debugger/BreakpointDialogFactory.java"/>
+        <include name="ptolemy/vergil/debugger/BreakpointConfigurerDialog.java"/>
+        <include name="ptolemy/vergil/debugger/BreakpointConfigurer.java"/>
+        <include name="ptolemy/vergil/debugger/QueryUtilities.java"/>
+        <include name="ptolemy/vergil/debugger/DebugProfile.java"/>
+        <include name="ptolemy/vergil/debugger/DebugController.java"/>
+        <include name="ptolemy/actor/gui/ColorAttribute.java"/>
+        <include name="ptolemy/actor/gui/PortConfigurerDialog.java"/>
+        <include name="ptolemy/actor/gui/RenameDialog.java"/>
+        <include name="ptolemy/actor/gui/EditParametersDialog.java"/>
+        <include name="ptolemy/actor/gui/EditorFactory.java"/>
+        <include name="ptolemy/actor/gui/style/TextStyle.java"/>
+        <include name="ptolemy/actor/gui/SizeAttribute.java"/>
+        <include name="ptolemy/actor/gui/WindowPropertiesAttribute.java"/>
+        <include name="ptolemy/actor/gui/properties/ToolBar.java"/>
+        <include name="ptolemy/actor/gui/style/StyleConfigurer.java"/>
+        <include name="ptolemy/actor/gui/PtolemyFrame.java"/>
+        <include name="ptolemy/actor/gui/TableauFactory.java"/>
+        <include name="ptolemy/actor/gui/Configurer.java"/>
+        <include name="ptolemy/actor/gui/HTMLViewer.java"/>
+        <include name="ptolemy/actor/gui/AbstractPlaceableActor.java"/>
+        <include name="ptolemy/actor/gui/PtolemyQuery.java"/>
+        <include name="ptolemy/actor/gui/properties.Button.java"/>
+        <include name="ptolemy/actor/gui/ConfigurationApplication.java"/>
+        <include name="ptolemy/actor/gui/ArrayOfRecordsPane.java"/>
+        <include name="ptolemy/actor/gui/TextEditor.java"/>
+        <include name="ptolemy/actor/gui/TextEditorTableau.java"/>
+        <include name="ptolemy/actor/gui/PtolemyDialog.java"/>
+        <include name="ptolemy/actor/gui/Placeable.java"/>
+        <include name="ptolemy/actor/gui/TopPack.java"/>
+        <include name="ptolemy/actor/gui/style/ParameterEditorStyle.java"/>
+        <include name="ptolemy/actor/gui/properties/GUIProperty.java"/>
+        <include name="ptolemy/actor/gui/JNLPUtilities.java"/>
+        <include name="ptolemy/actor/gui/EditorPaneFactory.java"/>
+        <include name="ptolemy/actor/gui/HTMLEffigyFactory.java"/>
+        <include name="ptolemy/actor/gui/HTMLAbout.java"/>
+        <include name="ptolemy/actor/gui/BrowserEffigy.java"/>
+        <include name="ptolemy/actor/gui/CustomQueryBoxParameter.java"/>
+        <include name="ptolemy/actor/gui/PasswordAttribute.java"/>
+        <include name="ptolemy/actor/gui/RenameConfigurer.java"/>
+        <include name="ptolemy/actor/gui/style/LineStyle.java"/>
+        <include name="ptolemy/actor/gui/style/CheckBoxStyle.java"/>
+        <include name="ptolemy/actor/gui/style/ChoiceStyle.java"/>
+        <include name="ptolemy/actor/gui/style/EditableChoiceStyle.java"/>
+        <include name="ptolemy/actor/gui/style/FileChooserStyle.java"/>
+        <include name="ptolemy/actor/gui/style/NotEditableLineStyle.java"/>
+        <include name="ptolemy/actor/gui/style/HiddenStyle.java"/>
+        <include name="ptolemy/actor/gui/style/ParameterEditorStyle.java"/>
+        <include name="ptolemy/actor/gui/ColorAttribute.java"/>
+        <include name="ptolemy/actor/gui/QueryUtilities.java"/>
+        <include name="ptolemy/actor/gui/GenerateCopyrights.java"/>
+        <include name="ptolemy/actor/gui/CheckModelSize.java"/>
+        <include name="ptolemy/actor/gui/HTMLEffigy.java"/>
+        <include name="ptolemy/actor/gui/ColorAttribute.java"/>
+        
+	
+        
+        <!-- -->  
+
+        <exclude name="com/microstar/xml/demo/**/*.*"/>
+        <exclude name="ptolemy/data/properties/**/*.*"/>
+        <exclude name="ptolemy/kernel/util/test/**/*.*"/>
+        <exclude name="ptolemy/moml/filter/test/**/*.*"/>
+        <exclude name="ptolemy/moml/test/**/*.*"/>
+        <exclude name="ptolemy/math/test/**/*.*"/>
+        <exclude name="ptolemy/util/test/**/*.*"/>
+        <exclude name="ptolemy/graph/test/**/*.*"/>
+        <exclude name="ptolemy/kernel/test/**/*.*"/>
+        <exclude name="ptolemy/moml/jxta/**/*.*"/>
+        <exclude name="ptolemy/data/expr/test/**/*.*"/>
+        <exclude name="ptolemy/kernel/undo/test/**/*.*"/>
+        <exclude name="ptolemy/data/type/test/**/*.*"/>
+        <exclude name="ptolemy/vergil/**/test/**/*.*"/>
+        <exclude name="ptolemy/vergil/MoMLViewerApplet.java"/>
+        <exclude name="ptolemy/vergil/VergilApplet.java"/>
+        <exclude name="ptolemy/vergil/actor/lib/MonitorImage.java"/>
+        <exclude name="ptolemy/vergil/actor/lib/VisualModelReference.java"/>
+        <exclude name="ptolemy/vergil/basic/layout/**"/>
+	
+        
+
+      </fileset>
+    </copy>
+
+    <copy todir="ptII-lite-exe">
+      <fileset dir="loader">
+        <include name="src/org/kepler/ExecutionEngine.java"/>
+      </fileset>
+    </copy>
+
+    <!-- copy the actors packages -->
+    <copy todir="ptII-lite-actors/src">
+      <fileset dir="ptolemy">
+        <include name="ptolemy/actor/**/*.java"/>
+        <include name="ptolemy/gui/**/*.java"/>
+        <include name="ptolemy/plot/**/*.java"/>
+        <include name="ptolemy/domains/sdf/kernel/**/*.java"/>
+        <include name="ptolemy/domains/sdf/lib/*.java"/>
+        <include name="ptolemy/domains/pn/kernel/**/*.java"/>
+        <include name="ptolemy/media/Picture.java"/>
+	
+        <exclude name="ptolemy/actor/gt/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/colt/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/database/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/properties/GUIAction.java"/>
+        <exclude name="ptolemy/actor/gui/properties/ActionGUIProperty.java"/>
+        <exclude name="ptolemy/actor/gui/ptjacl/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/properties/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/python/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/run/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/test/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/embeddedJava/**/*.*"/>
+        <!-- <exclude name="ptolemy/actor/lib/io/**/*.*"/> -->
+        <exclude name="ptolemy/actor/lib/io/comm/*.*"/>
+        <exclude name="ptolemy/actor/lib/javasound/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jmf/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jni/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/joystick/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/js/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jxta/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/jmf/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/logic/fuzzy/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/python/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/x10/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/string/test/**/*.*"/>
+        <exclude name="ptolemy/actor/ptalon/**/*.*"/>
+        <exclude name="ptolemy/gui/test/**/*.*"/>
+        <exclude name="ptolemy/plot/servlet/**/*.*"/>
+        <exclude name="ptolemy/actor/gui/jnlp/**/*.*"/>
+        <exclude name="ptolemy/actor/util/test/**/*.*"/>
+        <exclude name="ptolemy/actor/test/**/*.*"/>
+        <exclude name="ptolemy/actor/lib/test/**/*.*"/>
+        <exclude name="ptolemy/actor/process/test/**/*.*"/>
+        <exclude name="ptolemy/actor/parameters/test/**/*.*"/>
+      </fileset>
+    </copy>
+
+    <!-- compile the packages -->
+    <javac debug="on" debuglevel="lines,vars,source" srcdir="ptII-lite-exe/src" destdir="ptII-lite-exe/target/classes"
+    	   classpath="ptolemy/lib/diva.jar:ptolemy-lib/lib/batik-all-1.6.jar"/>
+    <javac debug="on" debuglevel="lines,vars,source" srcdir="ptII-lite-actors/src" destdir="ptII-lite-actors/target/classes"
+           classpath="ptII-lite-exe/target/classes"/>
+
+    <!-- create the jar file -->
+    <jar destfile="ptII-lite-exe/target/ptII-lite-exe.jar" basedir="ptII-lite-exe/target/classes" />
+    <jar destfile="ptII-lite-actors/target/ptII-lite-actors.jar" basedir="ptII-lite-actors/target/classes" />
+
+    <!--
+	Once this task is run, you can try out the executionEngine either with the
+	junit test or with the following command:
+
+	java -classpath
+	ptII-exe/target/ptII-exe.jar:ptII-actors/target/ptII-actors.jar:util/target/util.jar:common/lib/jar/sms/commons-logging.jar
+	org.kepler.ExecutionEngine
+	/Users/berkley/project/kepler/loader/resources/test/test-model-1.xml
+
+      -->
+
+  </target>
+
+  <!-- get project help -->
+  <target name="help">
+    <exec executable="ant" osfamily="unix" dir="build-area">
+      <arg value="-projecthelp" />
+    </exec>
+    <exec executable="cmd" osfamily="dos" dir="build-area">
+      <arg value="/c"/>
+      <arg value="ant.bat"/>
+      <arg value="-p"/>
+    </exec>
+  </target>
+
+  <!-- model names the model to be opened.  The default is the empty string.  To use this, run 'ant vergil -Dmodel=foo.xml' -->
+  <property name="model" value="" />
+
+  <target name="vergil"
+	  description="Invoke the Ptolemy II User Interface.  To run a model, use ant vergil -Dmodel=model.xml"
+	  >
+    <echo>Invoke Ptolemy's Vergil UI without Kepler.  This is useful for debugging.
+Note that paths are relative to the kepler/ directory, not kepler/build-area.
+To open a model, try cd build-area; ant vergil -Dmodel=ptolemy/src/ptolemy/actor/lib/Sinewave.xml
+
+</echo>
+
+    <java classname="ptolemy.vergil.VergilApplication"
+	  fork="true">
+      <classpath>
+	<pathelement location="ptolemy/src" />
+	<pathelement location="ptolemy/target/classes" />
+      </classpath>
+      <jvmarg value="-Xmx1024m"/>
+      <arg line="-ptinyKepler ${model}"/>
+    </java>
+  </target>
+
+</project>

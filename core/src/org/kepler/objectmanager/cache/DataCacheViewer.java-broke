@@ -1,0 +1,919 @@
+/**
+ *    '$RCSfile$'
+ *
+ *     '$Author: welker $'
+ *       '$Date: 2010-05-05 22:21:26 -0700 (Wed, 05 May 2010) $'
+ *   '$Revision: 24234 $'
+ *
+ *  For Details: http://kepler.ecoinformatics.org
+ *
+ * Copyright (c) 2003 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * Permission is hereby granted, without written agreement and without
+ * license or royalty fees, to use, copy, modify, and distribute this
+ * software and its documentation for any purpose, provided that the
+ * above copyright notice and the following two paragraphs appear in
+ * all copies of this software.
+ *
+ * IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY
+ * FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES
+ * ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN
+ * IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
+ *
+ * THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE
+ * PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND THE UNIVERSITY
+ * OF CALIFORNIA HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT,
+ * UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+ */
+package org.kepler.objectmanager.cache;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+
+/**
+ * The Query Builder app which extends a JPanel. This enables it to be embedded in an applet or an application.
+ */
+public class DataCacheViewer extends JPanel implements ListSelectionListener
+{
+
+  // The preferred size of the demo
+  private static final int    PREFERRED_WIDTH  = 1024;
+  private static final int    PREFERRED_HEIGHT = 768;
+
+  // Status Bar
+  private JTextField          mStatusField = null;
+  private JMenuBar            mMenuBar     = null;
+  private JFrame              mFrame       = null;
+  private JTable              mTableView   = null;
+  private CacheModel          mCacheModel  = new CacheModel(this);
+  private RefreshAction       mRefreshAction;
+  private RefreshAllAction    mRefreshAllAction;
+  private DeleteAction        mDeleteAction;
+  private DeleteAllAction     mDeleteAllAction;
+  private ViewDataAction[]    mViewDataAction = new ViewDataAction[4];
+  private SaveAction          mSaveAction;
+  boolean                     mHasChanged  = false;
+  private DataCacheManager    mCacheMgr    = DataCacheManager.getInstance(); 
+  
+   /**
+   * Constructor with Applet
+   * @param aApplet
+   */
+  public DataCacheViewer(GraphicsConfiguration gc)
+  {
+    initialize(gc);
+  }
+
+  /**
+   * General Method for initializing the class
+   *
+   */
+  private void initialize(GraphicsConfiguration gc)
+  {
+    setLayout(new BorderLayout());
+
+    // set the preferred size of the demo
+    setPreferredSize(new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT));
+
+    initializeUI(gc);
+
+    // Note that
+    // we again must do this on the GUI thread using invokeLater.
+    SwingUtilities.invokeLater(new Runnable()
+    {
+      public void run()
+      {
+        showApp();
+       }
+    });
+  }
+
+  /**
+   * 
+   *
+   */
+  public void refreshSelectedItem()
+  {
+      mHasChanged = true;
+      mSaveAction.setEnabled(mHasChanged);
+      int[] rows = mTableView.getSelectedRows();
+      for (int i=0;i<rows.length;i++)
+      {
+          mCacheModel.deleteItemAt(rows[i]);
+          DataCacheObject item = (DataCacheObject)mCacheMgr.getItemAt(rows[i]);
+          item.refresh(mCacheModel);
+      }
+    
+  }
+    
+  /**
+   * 
+   *
+   */
+  public void refreshAll()
+  {
+      mHasChanged = true;
+      mSaveAction.setEnabled(mHasChanged);
+      for (Enumeration e = mCacheMgr.getItems().elements(); e.hasMoreElements();)
+      {
+          DataCacheObject item = (DataCacheObject)e.nextElement();
+          item.refresh(mCacheModel);
+      }
+  }
+  
+  /**
+   * 
+   *
+   */
+  public void deleteSelectedItem()
+  {
+      if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Do you wish to remove the selected item?", "Delete Item", JOptionPane.YES_NO_OPTION))
+      {
+          mHasChanged = true;
+          mSaveAction.setEnabled(mHasChanged);
+          mCacheModel.deleteItems(mTableView.getSelectedRows());
+      }
+  }
+    
+  /**
+   * 
+   *
+   */
+  public void deleteAllItems()
+  {
+      if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Do you wish to remove all the items?", "Delete All", JOptionPane.YES_NO_OPTION))
+      {
+          mHasChanged = true;
+          mSaveAction.setEnabled(mHasChanged);
+          mCacheModel.clear();
+      }
+  }
+  
+  public JComponent createTableDataView(byte[] aData, int aMode)
+  {
+     return new JTable(new ViewDataTableModel(aData, aMode == 2));
+  }
+  
+  public JComponent createAttrView(DataCacheObject aItem)
+  {
+     JTable table = new JTable(new AttrModel(aItem));
+     return table;
+  }
+  
+  /**
+   * 
+   *
+   */
+  public void viewDataForSelectedItem(int aMode)
+  {
+      DataCacheObject item = (DataCacheObject)mCacheMgr.getItems().elementAt(mTableView.getSelectedRow());
+      JFrame dataViewer = new JFrame();
+      dataViewer.getContentPane().setLayout(new BorderLayout());
+      JComponent content = null;
+      switch (aMode) 
+      {
+          case 0 :
+          {
+              JEditorPane editor = new JEditorPane();
+              String dataStr = "No Data Available.";
+              if (item.getData() != null) 
+              {
+                  dataStr = new String(item.getData());
+              }
+              editor.setText(dataStr);
+              content = editor;
+          } break;
+          
+          case 1 :
+          case 2 :
+          {
+              content = createTableDataView(item.getData(), aMode);
+          } break;
+          
+          case 3 :
+          {
+              content = createAttrView(item);
+          } break;
+      }
+      JScrollPane scroller = new JScrollPane(content);
+      dataViewer.getContentPane().add(scroller, BorderLayout.CENTER);
+      dataViewer.setBounds(0,0,600,400);
+      dataViewer.show();
+  }
+ 
+    // *******************************************************
+    // *************** Load UI ******************
+    // *******************************************************
+    public void initializeUI(GraphicsConfiguration gc)
+    {
+        mFrame = new JFrame(gc);
+        JPanel top = new JPanel();
+        top.setLayout(new BorderLayout());
+        add(top, BorderLayout.NORTH);
+        mMenuBar = createMenus();
+        if (mMenuBar != null)
+            top.add(mMenuBar, BorderLayout.NORTH);
+        
+        mStatusField = new JTextField("");
+        mStatusField.setEditable(false);
+        add(mStatusField, BorderLayout.SOUTH);
+        
+        // Create the table
+        mTableView = new JTable(mCacheModel);
+        JScrollPane scrollpane = new JScrollPane(mTableView);
+        mTableView.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        mTableView.setColumnSelectionAllowed(false);
+        mTableView.setRowSelectionAllowed(true);
+        mTableView.getSelectionModel().addListSelectionListener(this);
+        add(scrollpane, BorderLayout.CENTER);
+        
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
+            JLabel label = new JLabel();
+
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+            {
+                if (!label.isOpaque())
+                {
+                    label.setOpaque(true);
+                }
+                label.setHorizontalAlignment(JLabel.LEFT);
+                label.setText(value.toString());
+
+                label.setBackground(isSelected? Color.BLUE : Color.WHITE);
+                label.setForeground(isSelected? Color.WHITE : Color.BLACK);
+                return label;
+            }
+        };  
+        for (int i=0;i<mCacheModel.HEADINGS.length;i++) {
+            TableColumn column = mTableView.getColumn(mCacheModel.HEADINGS[i]);
+            column.setCellRenderer(renderer);
+        }
+    }
+    
+    /**
+     * Create menus
+     */
+    public JMenuBar createMenus()
+    {
+        JMenuBar menuBar = null;
+        menuBar = new JMenuBar();
+        JMenuItem mi;
+        JMenu fileMenu = (JMenu) menuBar.add(new JMenu("File"));
+        fileMenu.setMnemonic('F');
+        mi = createMenuItem(fileMenu, "Save", "s", "Save", false, mSaveAction = new SaveAction(this));
+        
+        fileMenu.addSeparator();
+        mi = createMenuItem(fileMenu, "Exit", "x", "Exit Appication", false, null);
+        mi.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        doExit();
+                    }
+                });
+        JMenu entriesMenu = (JMenu) menuBar.add(new JMenu("Entries"));
+        entriesMenu.setMnemonic('E');
+        mi = createMenuItem(entriesMenu, "Refresh", "R", "Refresh", false, mRefreshAction = new RefreshAction(this));
+        mi = createMenuItem(entriesMenu, "Refresh All", "A", "Refresh All", mCacheMgr.getSize() > 0, mRefreshAllAction = new RefreshAllAction(this));
+        entriesMenu.addSeparator();
+        mi = createMenuItem(entriesMenu, "Delete Item(s)", "D", "Delete", false, mDeleteAction = new DeleteAction(this));
+        mi = createMenuItem(entriesMenu, "Delete All", "e", "Delete All", mCacheMgr.getSize() > 0, mDeleteAllAction = new DeleteAllAction(this));
+        
+        JMenu viewMenu = (JMenu) menuBar.add(new JMenu("View"));
+        viewMenu.setMnemonic('V');
+        mi = createMenuItem(viewMenu, "Attributes", "A", "Attributes", false, mViewDataAction[3] = new ViewDataAction(this, 3));
+        viewMenu.addSeparator();
+        mi = createMenuItem(viewMenu, "Data", "D", "Data", false, mViewDataAction[0] = new ViewDataAction(this, 0));
+        mi = createMenuItem(viewMenu, "Data As Table", "T", "Data As Table", false, mViewDataAction[1] = new ViewDataAction(this, 1));
+        mi = createMenuItem(viewMenu, "Data As Table w/ Header", "H", "Data As Table w/ Header", false, mViewDataAction[2] = new ViewDataAction(this, 2));
+       
+        return menuBar;
+    }
+    
+    /**
+     * Checks to see if cache has changed before exiting
+     *
+     */
+    protected void doExit()
+    {
+        if (mHasChanged) 
+        {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "The Cache has changed, do you wish to save?", "Cache has changed.", JOptionPane.YES_NO_OPTION))
+            {
+                mCacheMgr.saveCache();
+            }
+        }
+        System.exit(0);
+    }
+
+    /**
+     * @param b
+     * @return
+     */
+    protected PropertyChangeListener createActionChangeListener(JMenuItem b)
+    {
+        return new ActionChangedListener(b);
+    }
+    
+    /**
+     * 
+     * @author globus
+     *
+     * TODO To change the template for this generated type comment go to
+     * Window - Preferences - Java - Code Generation - Code and Comments
+     */
+    private class ActionChangedListener implements PropertyChangeListener
+    {
+        JMenuItem menuItem;
+        ActionChangedListener(JMenuItem mi)
+        {
+            super();
+            this.menuItem = mi;
+        }
+        public void propertyChange(PropertyChangeEvent e)
+        {
+            String propertyName = e.getPropertyName();
+            if (e.getPropertyName().equals(Action.NAME))
+            {
+                String text = (String) e.getNewValue();
+                menuItem.setText(text);
+            } else if (propertyName.equals("enabled"))
+            {
+                Boolean enabledState = (Boolean) e.getNewValue();
+                menuItem.setEnabled(enabledState.booleanValue());
+            }
+        }
+    }
+    
+  /**
+   * Creates a generic menu item
+   */
+    public JMenuItem createMenuItem(JMenu aMenu,
+                                    String aLabel,
+                                    String aMnemonic,
+                                    String aAccessibleDescription,
+                                    boolean aEnabled,
+                                    AbstractAction aAction)
+    {
+        JMenuItem mi = (JMenuItem) aMenu.add(new JMenuItem(aLabel));
+        mi.setMnemonic(aMnemonic.charAt(0));
+        mi.getAccessibleContext().setAccessibleDescription(aAccessibleDescription);
+        mi.addActionListener(aAction);
+        if (aAction != null)
+        {
+          aAction.addPropertyChangeListener(createActionChangeListener(mi));
+          aAction.setEnabled(aEnabled);
+        }
+        //mi.setEnabled(aEnabled);
+        return mi;
+    }
+
+
+  
+  /**
+   * Bring up the PPApp demo by showing the frame (only applicable if coming up
+   * as an application, not an applet);
+   */
+  public void showApp()
+  {
+      // put PPApp in a frame and show it
+      JFrame f = getFrame();
+      f.setTitle("Data Cache Viewer");
+      f.getContentPane().add(this, BorderLayout.CENTER);
+      f.pack();
+
+      Rectangle screenRect = f.getGraphicsConfiguration().getBounds();
+      Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(
+          f.getGraphicsConfiguration());
+
+      // Make sure we don't place the demo off the screen.
+      int centerWidth = screenRect.width < f.getSize().width ? screenRect.x : screenRect.x
+          + screenRect.width / 2 - f.getSize().width / 2;
+      int centerHeight = screenRect.height < f.getSize().height ? screenRect.y : screenRect.y
+          + screenRect.height / 2 - f.getSize().height / 2;
+
+      centerHeight = centerHeight < screenInsets.top ? screenInsets.top : centerHeight;
+
+      f.setLocation(centerWidth, centerHeight);
+      f.show();
+  }
+
+  /**
+   * Returns the frame instance
+   */
+  public JFrame getFrame()
+  {
+    return mFrame;
+  }
+
+  /**
+   * Returns the menubar
+   */
+  public JMenuBar getMenuBar()
+  {
+    return mMenuBar;
+  }
+
+  /**
+   * Set the status
+   */
+  public void setStatus(String s)
+  {
+    // do the following on the gui thread
+    SwingUtilities.invokeLater(new DCVAppRunnable(this, s)
+    {
+      public void run()
+      {
+        mApp.mStatusField.setText((String) obj);
+      }
+    });
+  }
+  
+  // *******************************************************
+  // ******************   Runnables  ***********************
+  // *******************************************************
+
+  /**
+   * Generic PPApp runnable. This is intended to run on the
+   * AWT gui event thread so as not to muck things up by doing
+   * gui work off the gui thread. Accepts a PPApp and an Object
+   * as arguments, which gives subtypes of this class the two
+   * "must haves" needed in most runnables for this demo.
+   */
+  class DCVAppRunnable implements Runnable
+  {
+
+    protected DataCacheViewer mApp;
+
+    protected Object    obj;
+
+    public DCVAppRunnable(DataCacheViewer aApp, Object obj)
+    {
+      this.mApp = aApp;
+      this.obj = obj;
+    }
+
+    public void run()
+    {
+    }
+  }
+
+  //-----------------------------------------------------------------------------
+  //-- ViewDataTableModel
+  //-----------------------------------------------------------------------------
+  public class ViewDataTableModel extends AbstractTableModel {
+      
+     private Vector mHeading = new Vector();
+     private Vector mRows    = new Vector();
+     private int    mNumCols = 0;
+    
+    /**
+     * 
+     * @param aCities
+     */
+    public ViewDataTableModel(byte[] aData, boolean aFirstRowHeader)
+    {
+        String dataStr = new String(aData);
+        int row = 0;
+        StringTokenizer st = new StringTokenizer(dataStr, "\r\n");
+        while (st.hasMoreTokens()) {
+            String line = st.nextToken();
+            while (line.indexOf("\t\t") > -1)
+            {
+                line = line.replaceAll("\t\t", "\t \t");
+            }
+            //System.err.println(line);
+            StringTokenizer tokens = new StringTokenizer(line, "\t");
+            if (row == 0 && aFirstRowHeader)
+            {
+                while (tokens.hasMoreTokens()) 
+                {
+                    String hdr = tokens.nextToken();
+                    //System.err.println(hdr);
+                    mHeading.addElement(hdr);
+                }
+                mNumCols = mHeading.size();
+            } else 
+            {
+                Vector columns = new Vector();
+                mRows.addElement(columns);
+                while (tokens.hasMoreTokens()) 
+                {
+                    columns.addElement(tokens.nextToken());
+                }
+                
+                if (!aFirstRowHeader && columns.size() > mNumCols)
+                {
+                    mNumCols = columns.size();
+                }
+            }
+            row++;
+        }
+        
+        if (!aFirstRowHeader)
+        {
+            for (int i=0;i<mNumCols;i++) 
+            {
+              mHeading.addElement(new String("Column #"+i)); 
+            }
+        }
+        
+    }
+    
+    public int getColumnCount() 
+    {
+        return mHeading.size();
+    }
+
+    public int getRowCount() 
+    {
+        return mRows.size();
+    }
+
+    public Object getValueAt(int row, int col)
+    {
+            Vector cols = (Vector) mRows.elementAt(row);
+            if (cols != null && col < cols.size())
+            {
+                return (String)cols.elementAt(col);
+            }
+            return "";
+    }
+
+    public String getColumnName(int column) {
+        return (String)mHeading.elementAt(column);
+    }
+
+    public Class getColumnClass(int c) {
+        return String.class;
+    }
+
+    public boolean isCellEditable(int row, int col) {
+        return false;
+    }
+
+    public void setValueAt(Object aValue, int row, int column) {
+    }
+  }
+    
+  //-----------------------------------------------------------------------------
+  //-- CacheModel
+  //-----------------------------------------------------------------------------
+  public class CacheModel extends AbstractTableModel implements DataCacheListener {
+      
+    public final String HEADINGS[] = { "Name", "Resource Name"};
+    private DataCacheManager    mCacheMgr    = DataCacheManager.getInstance(); 
+    
+    protected DataCacheViewer mApp    = null;
+    
+    /**
+     * 
+     * @param aCities
+     */
+    public CacheModel(DataCacheViewer aApp)
+    {
+      mApp = aApp;
+    }
+    
+    public int getColumnCount() 
+    {
+        return HEADINGS.length;
+    }
+
+    public int getRowCount() 
+    {
+        return mCacheMgr.getSize();
+    }
+
+    public void deleteItemAt(int aInx)
+    {
+        mCacheMgr.removeItem(aInx);
+        this.fireTableDataChanged();
+    }
+    
+    public void deleteItems(int[] aIndexes)
+    {
+        mCacheMgr.removeItems(aIndexes);
+        this.fireTableDataChanged();
+    }
+    
+    public void clear()
+    {
+        int size = mCacheMgr.getSize();
+        mCacheMgr.clear();
+        this.fireTableDataChanged();
+    }
+    
+    public Object getValueAt(int row, int col)
+        {
+            DataCacheObject item = (DataCacheObject) mCacheMgr.getItemAt(row);
+            if (item != null)
+            {
+                switch (col) {
+                    case 0 :
+                        return item.getName();
+                    case 1 :
+                        return item.getResourceName();
+
+                }
+            }
+            return "";
+        }
+
+    public String getColumnName(int column) {
+        return HEADINGS[column];
+    }
+
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+
+    public boolean isCellEditable(int row, int col) {
+        return false;
+    }
+
+    public void setValueAt(Object aValue, int row, int column) { /*
+                                                                  * data[row][column] =
+                                                                  * aValue;
+                                                                  */
+    }
+    
+    //------------------------------------------------------------------------
+    //-- DataCacheListener
+    //------------------------------------------------------------------------
+    
+    public void complete(DataCacheObject aItem)
+    {
+        if (aItem.isReady())
+        {
+            this.fireTableRowsDeleted(0, mCacheMgr.getSize());
+            this.fireTableDataChanged();
+        }
+    }
+
+  }
+  
+  //-----------------------------------------------------------------------------
+  //-- AttrModel
+  //-----------------------------------------------------------------------------
+  public class AttrModel extends AbstractTableModel {
+      
+    public final String HEADINGS[] = { "Attibute", "Value"};
+    
+    protected DataCacheObject mItem   = null;
+    protected Vector        mNames  = new Vector();
+    protected Vector        mValues = new Vector();
+    
+    /**
+     * 
+     * @param aCities
+     */
+    public AttrModel(DataCacheObject aItem)
+    {
+        mItem = aItem;
+        
+        Hashtable attrs = aItem.getAttrs();
+        for (Enumeration e=attrs.keys();e.hasMoreElements();)
+        {
+            String key = (String)e.nextElement();
+            mNames.addElement(key);
+            mValues.addElement(attrs.get(key));
+        }
+    }
+    
+    public int getColumnCount() 
+    {
+        return HEADINGS.length;
+    }
+
+    public int getRowCount() 
+    {
+        return mNames.size() + 4;
+    }
+
+    
+    public Object getValueAt(int row, int col)
+        {
+            DataCacheObject item = (DataCacheObject) mCacheMgr.getItemAt(row);
+            if (item != null)
+            {
+                switch (col) {
+                    case 0 :
+                        switch (row)
+                        {
+                          case 0 : return "Local File Name";
+                          case 1 : return "Created Date";
+                          case 2 : return "Serial Class Name";
+                          case 3 : return "Data Size";
+                          default:
+                              return mNames.elementAt(row-3);
+                        }
+                    case 1 :
+                        switch (row)
+                        {
+                          case 0 : return mItem.getLocalFileName();
+                          case 1 : return mItem.getCreatedDate();
+                          case 2 : return mItem.getSerialClassName();
+                          case 3 : return Integer.toString(item.getSize());
+                         default:
+                              return mValues.elementAt(row-3);
+                        }
+                 }
+            }
+            return "";
+        }
+
+    public String getColumnName(int column) {
+        return HEADINGS[column];
+    }
+
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+
+    public boolean isCellEditable(int row, int col) {
+        return false;
+    }
+
+    public void setValueAt(Object aValue, int row, int column) { /*
+                                                                  * data[row][column] =
+                                                                  * aValue;
+                                                                  */
+    }
+    
+  }
+  
+  //--------------------------------------------
+  //--------------- Actions --------------------
+  //--------------------------------------------
+  class RefreshAction extends AbstractAction
+  {
+    DataCacheViewer mDataCacheViewer;
+    protected RefreshAction(DataCacheViewer aDataCacheViewer)
+    {
+      super("RefreshAction");
+      this.mDataCacheViewer = aDataCacheViewer;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+      mDataCacheViewer.refreshSelectedItem();
+    }
+  }
+  
+  class RefreshAllAction extends AbstractAction
+  {
+    DataCacheViewer mDataCacheViewer;
+    protected RefreshAllAction(DataCacheViewer aDataCacheViewer)
+    {
+      super("RefreshAllAction");
+      this.mDataCacheViewer = aDataCacheViewer;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+      mDataCacheViewer.refreshAll();
+    }
+  }
+  
+  class DeleteAction extends AbstractAction
+  {
+    DataCacheViewer mDataCacheViewer;
+    protected DeleteAction(DataCacheViewer aDataCacheViewer)
+    {
+      super("DeleteAction");
+      this.mDataCacheViewer = aDataCacheViewer;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+      mDataCacheViewer.deleteSelectedItem();
+    }
+  }
+  
+  class DeleteAllAction extends AbstractAction
+  {
+    DataCacheViewer mDataCacheViewer;
+    protected DeleteAllAction(DataCacheViewer aDataCacheViewer)
+    {
+      super("DeleteAllAction");
+      this.mDataCacheViewer = aDataCacheViewer;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+      mDataCacheViewer.deleteAllItems();
+    }
+  }
+  
+  class ViewDataAction extends AbstractAction
+  {
+      int _mode = 0;
+      DataCacheViewer mDataCacheViewer;
+      protected ViewDataAction(DataCacheViewer aDataCacheViewer, int aMode)
+      {
+        super("ViewDataAction");
+        _mode = aMode;
+        this.mDataCacheViewer = aDataCacheViewer;
+      }
+      public void actionPerformed(ActionEvent e)
+      {
+        mDataCacheViewer.viewDataForSelectedItem(_mode);
+      }
+  }
+  
+  class SaveAction extends AbstractAction
+  {
+    DataCacheViewer mDataCacheViewer;
+    protected SaveAction(DataCacheViewer aDataCacheViewer)
+    {
+      super("SaveAction");
+      this.mDataCacheViewer = aDataCacheViewer;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+        mHasChanged = false;
+        mSaveAction.setEnabled(mHasChanged);
+        mCacheMgr.saveCache();
+    }
+  }
+  
+  
+
+  
+  //--------------------------------------------
+  //-------- ListSelectionListener -------------
+  //--------------------------------------------
+  
+  /**
+   * Upates the "inspector" ui when an item in the list is clicked on
+   */
+  public void valueChanged(ListSelectionEvent e)
+  {
+    if (e == null || !e.getValueIsAdjusting()) 
+    {
+      int selectedInx = mTableView.getSelectedRow();
+      boolean isSelected = selectedInx != -1 && mCacheModel.getRowCount() > 0;
+      mRefreshAction.setEnabled(isSelected);
+      mRefreshAllAction.setEnabled(mCacheModel.getRowCount() > 0);
+      mDeleteAction.setEnabled(isSelected);
+      mDeleteAllAction.setEnabled(mCacheModel.getRowCount() > 0);
+      for (int i=0;i<mViewDataAction.length;i++)
+      {
+        mViewDataAction[i].setEnabled(isSelected);
+      }
+    }
+  }  
+  //-----------------------------------------------------------------------------
+  //-- Application MAIN
+  //-----------------------------------------------------------------------------
+
+  /**
+   * PPApp Main. Called only if we're an application, not an applet.
+   */
+  public static void main(String[] args)
+  {
+    // Create PPApp on the default monitor
+    DataCacheViewer qbApp = new DataCacheViewer(GraphicsEnvironment.getLocalGraphicsEnvironment()
+        .getDefaultScreenDevice().getDefaultConfiguration());
+  }
+
+}
+

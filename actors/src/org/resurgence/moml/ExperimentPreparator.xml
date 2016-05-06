@@ -1,0 +1,208 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="ExperimentPreparator" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_location" class="ptolemy.kernel.util.Location" value="[635.0, 225.0]">
+    </property>
+    <property name="ExperimentName" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[480.0, 35.0]">
+        </property>
+    </property>
+    <property name="ExperimentType" class="ptolemy.data.expr.StringParameter" value="G">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="G" class="ptolemy.kernel.util.StringAttribute" value="G">
+            </property>
+            <property name="O" class="ptolemy.kernel.util.StringAttribute" value="O">
+            </property>
+            <property name="A" class="ptolemy.kernel.util.StringAttribute" value="A">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[480.0, 60.0]">
+        </property>
+    </property>
+    <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{0.0, 1.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:#00BB00" y="20">-F-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[480.0, 85.0]">
+        </property>
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1024, 804}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[775, 681]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{387.5, 340.5}">
+    </property>
+    <port name="planFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 140.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="output" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[725.0, 520.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="External Execution" class="ptolemy.actor.lib.Exec">
+        <property name="directory" class="ptolemy.data.expr.FileParameter" value="$CWD">
+        </property>
+        <property name="environment" class="ptolemy.data.expr.Parameter" value="{{name = &quot;&quot;, value = &quot;&quot;}}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[665.0, 235.0]">
+        </property>
+    </entity>
+    <entity name="External Execution2" class="ptolemy.actor.lib.Exec">
+        <property name="directory" class="ptolemy.data.expr.FileParameter" value="$CWD">
+        </property>
+        <property name="environment" class="ptolemy.data.expr.Parameter" value="{{name = &quot;&quot;, value = &quot;&quot;}}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[670.0, 375.0]">
+        </property>
+    </entity>
+    <entity name="String Constant" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="$NimrodBinary generate $ExperimentName">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.BoxedValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="value">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="60">
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[300.0, 140.0]">
+        </property>
+    </entity>
+    <entity name="String Constant2" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="$NimrodBinary portalapi addrun $ExperimentName $ExperimentType">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.BoxedValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="value">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="60">
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[240.0, 365.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;.&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[530.0, 225.0]">
+        </property>
+    </entity>
+    <entity name="String Replace" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value=".*\.">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{210.0, 225.0}">
+        </property>
+    </entity>
+    <entity name="External Execution3" class="ptolemy.actor.lib.Exec">
+        <property name="directory" class="ptolemy.data.expr.FileParameter" value="$CWD">
+        </property>
+        <property name="environment" class="ptolemy.data.expr.Parameter" value="{{name = &quot;&quot;, value = &quot;&quot;}}">
+        </property>
+
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 510.0]">
+        </property>
+    </entity>
+    <entity name="String Constant3" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="$NimrodBinary create $ExperimentName">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.BoxedValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="value">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="60">
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[165.0, 500.0]">
+        </property>
+    </entity>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[105.0, 140.0]">
+        </vertex>
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="planFileHandle" relation="relation6"/>
+    <link port="output" relation="relation5"/>
+    <link port="External Execution.command" relation="relation7"/>
+    <link port="External Execution.output" relation="relation3"/>
+    <link port="External Execution2.command" relation="relation4"/>
+    <link port="External Execution2.output" relation="relation9"/>
+    <link port="String Constant.output" relation="relation"/>
+    <link port="String Constant.trigger" relation="relation6"/>
+    <link port="String Constant2.output" relation="relation4"/>
+    <link port="String Constant2.trigger" relation="relation3"/>
+    <link port="String Accumulator.parts" relation="relation"/>
+    <link port="String Accumulator.parts" relation="relation2"/>
+    <link port="String Accumulator.whole" relation="relation7"/>
+    <link port="String Replace.stringToEdit" relation="relation6"/>
+    <link port="String Replace.output" relation="relation2"/>
+    <link port="External Execution3.command" relation="relation8"/>
+    <link port="External Execution3.output" relation="relation5"/>
+    <link port="String Constant3.output" relation="relation8"/>
+    <link port="String Constant3.trigger" relation="relation9"/>
+</class>

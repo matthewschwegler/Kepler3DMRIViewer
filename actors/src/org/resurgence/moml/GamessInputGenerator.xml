@@ -1,0 +1,625 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="GamessInputGenerator" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="4.0.1">
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="[615.0, 225.0]">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1024, 742}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[775, 619]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{387.5, 309.5}">
+    </property>
+    <property name="ScfType" class="ptolemy.data.expr.StringParameter" value="RHF">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="RHF" class="ptolemy.kernel.util.StringAttribute" value="RHF">
+            </property>
+            <property name="UHF" class="ptolemy.kernel.util.StringAttribute" value="UHF">
+            </property>
+            <property name="ROHF" class="ptolemy.kernel.util.StringAttribute" value="ROHF">
+            </property>
+            <property name="GVB" class="ptolemy.kernel.util.StringAttribute" value="GVB">
+            </property>
+            <property name="MCSCF" class="ptolemy.kernel.util.StringAttribute" value="MCSCF">
+            </property>
+            <property name="NONE" class="ptolemy.kernel.util.StringAttribute" value="NONE">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 25.0]">
+        </property>
+    </property>
+    <property name="MpLevel" class="ptolemy.data.expr.StringParameter" value="0">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="0" class="ptolemy.kernel.util.StringAttribute" value="0">
+            </property>
+            <property name="2" class="ptolemy.kernel.util.StringAttribute" value="2">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 55.0]">
+        </property>
+    </property>
+    <property name="RunType" class="ptolemy.data.expr.StringParameter" value="ENERGY">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="ENERGY" class="ptolemy.kernel.util.StringAttribute" value="ENERGY">
+            </property>
+            <property name="GRADIENT" class="ptolemy.kernel.util.StringAttribute" value="GRADIENT">
+            </property>
+            <property name="HESSIAN" class="ptolemy.kernel.util.StringAttribute" value="HESSIAN">
+            </property>
+            <property name="OPTIMIZE" class="ptolemy.kernel.util.StringAttribute" value="OPTIMIZE">
+            </property>
+            <property name="TRUDGE" class="ptolemy.kernel.util.StringAttribute" value="TRUDGE">
+            </property>
+            <property name="SADPOINT" class="ptolemy.kernel.util.StringAttribute" value="SADPOINT">
+            </property>
+            <property name="IRC" class="ptolemy.kernel.util.StringAttribute" value="IRC">
+            </property>
+            <property name="VSCF" class="ptolemy.kernel.util.StringAttribute" value="VSCF">
+            </property>
+            <property name="DRC" class="ptolemy.kernel.util.StringAttribute" value="DRC">
+            </property>
+            <property name="GLOBOP" class="ptolemy.kernel.util.StringAttribute" value="GLOBOP">
+            </property>
+            <property name="OPTFMO" class="ptolemy.kernel.util.StringAttribute" value="OPTFMO">
+            </property>
+            <property name="GRADEXTR" class="ptolemy.kernel.util.StringAttribute" value="GRADEXTR">
+            </property>
+            <property name="SURFACE" class="ptolemy.kernel.util.StringAttribute" value="SURFACE">
+            </property>
+            <property name="PROP" class="ptolemy.kernel.util.StringAttribute" value="PROP">
+            </property>
+            <property name="RAMAN" class="ptolemy.kernel.util.StringAttribute" value="RAMAN">
+            </property>
+            <property name="NMR" class="ptolemy.kernel.util.StringAttribute" value="NMR">
+            </property>
+            <property name="MOROKUMA" class="ptolemy.kernel.util.StringAttribute" value="MOROKUMA">
+            </property>
+            <property name="TRANSITN" class="ptolemy.kernel.util.StringAttribute" value="TRANSITN">
+            </property>
+            <property name="FFIELD" class="ptolemy.kernel.util.StringAttribute" value="FFIELD">
+            </property>
+            <property name="TDHF" class="ptolemy.kernel.util.StringAttribute" value="TDHF">
+            </property>
+            <property name="MAKEFP" class="ptolemy.kernel.util.StringAttribute" value="MAKEFP">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 85.0]">
+        </property>
+    </property>
+    <property name="ExeType" class="ptolemy.data.expr.StringParameter" value="RUN">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="RUN" class="ptolemy.kernel.util.StringAttribute" value="RUN">
+            </property>
+            <property name="CHECK" class="ptolemy.kernel.util.StringAttribute" value="CHECK">
+            </property>
+            <property name="DEBUG" class="ptolemy.kernel.util.StringAttribute" value="DEBUG">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 115.0]">
+        </property>
+    </property>
+    <property name="Charge" class="ptolemy.data.expr.StringParameter" value="0">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 145.0]">
+        </property>
+    </property>
+    <property name="Multiplicity" class="ptolemy.data.expr.StringParameter" value="1">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[185.0, 25.0]">
+        </property>
+    </property>
+    <property name="TimeLimit" class="ptolemy.data.expr.StringParameter" value="600">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[185.0, 55.0]">
+        </property>
+    </property>
+    <property name="ReplicatedMemory" class="ptolemy.data.expr.StringParameter" value="10">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[185.0, 85.0]">
+        </property>
+    </property>
+    <property name="DistributedMemory" class="ptolemy.data.expr.StringParameter" value="10">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[185.0, 115.0]">
+        </property>
+    </property>
+    <property name="GaussianBasisSet" class="ptolemy.data.expr.StringParameter" value="STO">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="MINI" class="ptolemy.kernel.util.StringAttribute" value="MINI">
+            </property>
+            <property name="MIDI" class="ptolemy.kernel.util.StringAttribute" value="MIDI">
+            </property>
+            <property name="STO" class="ptolemy.kernel.util.StringAttribute" value="STO">
+            </property>
+            <property name="N21" class="ptolemy.kernel.util.StringAttribute" value="N21">
+            </property>
+            <property name="N31" class="ptolemy.kernel.util.StringAttribute" value="N31">
+            </property>
+            <property name="N311" class="ptolemy.kernel.util.StringAttribute" value="N311">
+            </property>
+            <property name="DZV" class="ptolemy.kernel.util.StringAttribute" value="DZV">
+            </property>
+            <property name="DH" class="ptolemy.kernel.util.StringAttribute" value="DH">
+            </property>
+            <property name="TZV" class="ptolemy.kernel.util.StringAttribute" value="TZV">
+            </property>
+            <property name="MC" class="ptolemy.kernel.util.StringAttribute" value="MC">
+            </property>
+            <property name="SBKJC" class="ptolemy.kernel.util.StringAttribute" value="SBKJC">
+            </property>
+            <property name="HW" class="ptolemy.kernel.util.StringAttribute" value="HW">
+            </property>
+            <property name="MNDO" class="ptolemy.kernel.util.StringAttribute" value="MNDO">
+            </property>
+            <property name="AM1" class="ptolemy.kernel.util.StringAttribute" value="AM1">
+            </property>
+            <property name="PM3" class="ptolemy.kernel.util.StringAttribute" value="PM3">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 25.0]">
+        </property>
+    </property>
+    <property name="NumberOfGaussians" class="ptolemy.data.expr.StringParameter" value="3">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 55.0]">
+        </property>
+    </property>
+    <property name="HeavyAtomPolarizationFunctions" class="ptolemy.data.expr.StringParameter" value="0">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="0" class="ptolemy.kernel.util.StringAttribute" value="0">
+            </property>
+            <property name="1" class="ptolemy.kernel.util.StringAttribute" value="1">
+            </property>
+            <property name="2" class="ptolemy.kernel.util.StringAttribute" value="2">
+            </property>
+            <property name="3" class="ptolemy.kernel.util.StringAttribute" value="3">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 85.0]">
+        </property>
+    </property>
+    <property name="LightAtomPolarizationFunctions" class="ptolemy.data.expr.StringParameter" value="0">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="0" class="ptolemy.kernel.util.StringAttribute" value="0">
+            </property>
+            <property name="1" class="ptolemy.kernel.util.StringAttribute" value="1">
+            </property>
+            <property name="2" class="ptolemy.kernel.util.StringAttribute" value="2">
+            </property>
+            <property name="3" class="ptolemy.kernel.util.StringAttribute" value="3">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 115.0]">
+        </property>
+    </property>
+    <property name="HeavyAtomDiffuseShell" class="ptolemy.data.expr.StringParameter" value="FALSE">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="FALSE" class="ptolemy.kernel.util.StringAttribute" value="FALSE">
+            </property>
+            <property name="TRUE" class="ptolemy.kernel.util.StringAttribute" value="TRUE">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 145.0]">
+        </property>
+    </property>
+    <property name="LightAtomDiffuseShell" class="ptolemy.data.expr.StringParameter" value="FALSE">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="FALSE" class="ptolemy.kernel.util.StringAttribute" value="FALSE">
+            </property>
+            <property name="TRUE" class="ptolemy.kernel.util.StringAttribute" value="TRUE">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[360.0, 175.0]">
+        </property>
+    </property>
+    <property name="DftType" class="ptolemy.data.expr.StringParameter" value="NONE">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="NONE" class="ptolemy.kernel.util.StringAttribute" value="NONE">
+            </property>
+            <property name="SLATER" class="ptolemy.kernel.util.StringAttribute" value="SLATER">
+            </property>
+            <property name="BECKE" class="ptolemy.kernel.util.StringAttribute" value="BECKE">
+            </property>
+            <property name="GILL" class="ptolemy.kernel.util.StringAttribute" value="GILL">
+            </property>
+            <property name="PBE" class="ptolemy.kernel.util.StringAttribute" value="PBE">
+            </property>
+            <property name="VWN" class="ptolemy.kernel.util.StringAttribute" value="VWN">
+            </property>
+            <property name="LYP" class="ptolemy.kernel.util.StringAttribute" value="LYP">
+            </property>
+            <property name="OP" class="ptolemy.kernel.util.StringAttribute" value="OP">
+            </property>
+            <property name="SVWN" class="ptolemy.kernel.util.StringAttribute" value="SVWN">
+            </property>
+            <property name="SLYP" class="ptolemy.kernel.util.StringAttribute" value="SLYP">
+            </property>
+            <property name="SOP" class="ptolemy.kernel.util.StringAttribute" value="SOP">
+            </property>
+            <property name="BVWN" class="ptolemy.kernel.util.StringAttribute" value="BVWN">
+            </property>
+            <property name="BLYP" class="ptolemy.kernel.util.StringAttribute" value="BLYP">
+            </property>
+            <property name="BOP" class="ptolemy.kernel.util.StringAttribute" value="BOP">
+            </property>
+            <property name="GVWN" class="ptolemy.kernel.util.StringAttribute" value="GVWN">
+            </property>
+            <property name="GLYP" class="ptolemy.kernel.util.StringAttribute" value="GLYP">
+            </property>
+            <property name="GOP" class="ptolemy.kernel.util.StringAttribute" value="GOP">
+            </property>
+            <property name="PBEVWN" class="ptolemy.kernel.util.StringAttribute" value="PBEVWN">
+            </property>
+            <property name="PBELYP" class="ptolemy.kernel.util.StringAttribute" value="PBELYP">
+            </property>
+            <property name="PBEOP" class="ptolemy.kernel.util.StringAttribute" value="PBEOP">
+            </property>
+            <property name="BHHLYP" class="ptolemy.kernel.util.StringAttribute" value="BHHLYP">
+            </property>
+            <property name="B3LYP" class="ptolemy.kernel.util.StringAttribute" value="B3LYP">
+            </property>
+            <property name="XALPHA" class="ptolemy.kernel.util.StringAttribute" value="XALPHA">
+            </property>
+            <property name="DEPRISTO" class="ptolemy.kernel.util.StringAttribute" value="DEPRISTO">
+            </property>
+            <property name="CAMA" class="ptolemy.kernel.util.StringAttribute" value="CAMA">
+            </property>
+            <property name="HALF" class="ptolemy.kernel.util.StringAttribute" value="HALF">
+            </property>
+            <property name="PWLOC" class="ptolemy.kernel.util.StringAttribute" value="PWLOC">
+            </property>
+            <property name="BPWLOC" class="ptolemy.kernel.util.StringAttribute" value="BPWLOC">
+            </property>
+            <property name="CAMB" class="ptolemy.kernel.util.StringAttribute" value="CAMB">
+            </property>
+            <property name="XVWN" class="ptolemy.kernel.util.StringAttribute" value="XVWN">
+            </property>
+            <property name="XPWLOC" class="ptolemy.kernel.util.StringAttribute" value="XPWLOC">
+            </property>
+            <property name="SPWLOC" class="ptolemy.kernel.util.StringAttribute" value="SPWLOC">
+            </property>
+            <property name="WIGNER" class="ptolemy.kernel.util.StringAttribute" value="WIGNER">
+            </property>
+             <property name="WS" class="ptolemy.kernel.util.StringAttribute" value="WS">
+            </property>
+             <property name="WIGEXP" class="ptolemy.kernel.util.StringAttribute" value="WIGEXP">
+            </property>
+         </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[185.0, 145.0]">
+        </property>
+    </property>
+    <property name="GamessInputDirectory" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[605.0, 25.0]">
+        </property>
+    </property>
+    <property name="NameOfStep" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[605.0, 55.0]">
+        </property>
+    </property>
+    <port name="gamessDataGroupHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 300.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="gamessInputHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[640.0, 515.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="File Name Chooser" class="org.resurgence.moml.FileNameChooser">
+        <property name="OutputFileDirectory" class="ptolemy.data.expr.StringParameter" value="$GamessInputDirectory">
+        </property>
+        <property name="FileNameAddition" class="ptolemy.data.expr.StringParameter" value="_$NameOfStep">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[255.0, 300.0]">
+        </property>
+        <property name="OutputFileType" class="ptolemy.data.expr.StringParameter" value="inp">
+        </property>
+    </entity>
+    <entity name="GAMESS Keywords" class="org.resurgence.moml.GamessKeywords">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[535.0, 320.0]">
+        </property>
+        <property name="ScfType" class="ptolemy.data.expr.StringParameter" value="$ScfType">
+        </property>
+        <property name="MpLevel" class="ptolemy.data.expr.StringParameter" value="$MpLevel">
+        </property>
+        <property name="RunType" class="ptolemy.data.expr.StringParameter" value="$RunType">
+        </property>
+        <property name="ExeType" class="ptolemy.data.expr.StringParameter" value="$ExeType">
+        </property>
+        <property name="Charge" class="ptolemy.data.expr.StringParameter" value="$Charge">
+        </property>
+        <property name="Multiplicity" class="ptolemy.data.expr.StringParameter" value="$Multiplicity">
+        </property>
+        <property name="TimeLimit" class="ptolemy.data.expr.StringParameter" value="$TimeLimit">
+        </property>
+        <property name="ReplicatedMemory" class="ptolemy.data.expr.StringParameter" value="$ReplicatedMemory">
+        </property>
+        <property name="DistributedMemory" class="ptolemy.data.expr.StringParameter" value="$DistributedMemory">
+        </property>
+        <property name="GaussianBasisSet" class="ptolemy.data.expr.StringParameter" value="$GaussianBasisSet">
+        </property>
+        <property name="NumberOfGaussians" class="ptolemy.data.expr.StringParameter" value="$NumberOfGaussians">
+        </property>
+        <property name="HeavyAtomPolarizationFunctions" class="ptolemy.data.expr.StringParameter" value="$HeavyAtomPolarizationFunctions">
+        </property>
+        <property name="LightAtomPolarizationFunctions" class="ptolemy.data.expr.StringParameter" value="$LightAtomPolarizationFunctions">
+        </property>
+        <property name="HeavyAtomDiffuseShell" class="ptolemy.data.expr.StringParameter" value="$HeavyAtomDiffuseShell">
+        </property>
+        <property name="LightAtomDiffuseShell" class="ptolemy.data.expr.StringParameter" value="$LightAtomDiffuseShell">
+        </property>
+        <property name="DftType" class="ptolemy.data.expr.StringParameter" value="$DftType">
+        </property>
+    </entity>
+    <entity name="Display" class="ptolemy.actor.lib.gui.Display">
+        <property name="rowsDisplayed" class="ptolemy.data.expr.Parameter" value="10">
+        </property>
+        <property name="columnsDisplayed" class="ptolemy.data.expr.Parameter" value="40">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[720.0, 435.0]">
+        </property>
+    </entity>
+    <entity name="GAMESS Atom Data Extractor" class="org.resurgence.moml.GamessAtomDataExtractor">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{260.0, 435.0}">
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[95.0, 300.0]">
+        </vertex>
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[600.0, 435.0]">
+        </vertex>
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="gamessDataGroupHandle" relation="relation"/>
+    <link port="gamessInputHandle" relation="relation5"/>
+    <link port="File Name Chooser.inputFileHandle" relation="relation"/>
+    <link port="File Name Chooser.outputFileName" relation="relation3"/>
+    <link port="GAMESS Keywords.gamessInputHandle" relation="relation5"/>
+    <link port="GAMESS Keywords.gamessInputName" relation="relation3"/>
+    <link port="GAMESS Keywords.gamessAtomData" relation="relation2"/>
+    <link port="Display.input" relation="relation5"/>
+    <link port="GAMESS Atom Data Extractor.gamessDataGroupHandle" relation="relation"/>
+    <link port="GAMESS Atom Data Extractor.gamessAtomData" relation="relation2"/>
+</class>

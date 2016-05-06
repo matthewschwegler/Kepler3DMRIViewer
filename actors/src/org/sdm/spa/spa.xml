@@ -1,0 +1,243 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE plot PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="spa" class="ptolemy.moml.EntityLibrary">
+  <configure>
+    <?moml
+      <group>
+
+  	<doc>DataFormat Services</doc>
+
+   	<entity name="BlastOne" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.BlastOne">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getAutoData">
+    		</property>
+    		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+ 	</entity>
+
+   	<entity name="BlastTwo" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.BlastTwo">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getAutoData">
+    		</property>
+    		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+	</entity>
+
+        <entity name="BrowserUI" class="org.sdm.spa.BrowserUI">
+        	<doc>BrowserUI</doc>
+        </entity>
+
+ 	<entity name="Clasfavor" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.Clusfavor">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getSData">
+    		</property>
+    		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+  	</entity>
+
+        <entity name="ClustalW" class="org.sdm.spa.ClustalW">
+        	<doc>ClustalW</doc>
+        </entity>
+
+  	<entity name="ClustalW_Local" class="org.sdm.spa.ClustalW"/>
+
+        <entity name="CreateExpressionFromQuery" class="org.sdm.spa.CreateExpressionFromQuery">
+        	<doc>CreateExpressionFromQuery</doc>
+        </entity>
+        
+        <entity name="CreateRequestFromResult" class="org.sdm.spa.CreateRequestFromResult">
+        	<doc>CreateRequestFromResult</doc>
+        </entity>        
+
+        <entity name="DummyActor" class="org.sdm.spa.DummyActor">
+        	<doc>DummyActor</doc>
+        </entity>
+
+	<entity name="ClustalW_Remote" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.ClustalW">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getAutoData">
+    		</property>
+     		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+	</entity>
+
+	<entity name="Email" class="org.sdm.spa.Email"/>
+        
+        <entity name="EnumHomolog" class="org.sdm.spa.EnumHomolog">
+        	<doc>EnumHomolog</doc>
+        </entity>
+
+        <entity name="EnumItem" class="org.sdm.spa.EnumItem">
+        	<doc>EnumItem</doc>
+        </entity>
+
+        <entity name="EnumItemTriggered" class="org.sdm.spa.EnumItemTriggered">
+  		<doc>This Looping facility will issue items in a syncronized way.</doc>
+  	</entity>
+
+ 	<entity name="ExtractItem" class="org.sdm.spa.ExtractItem">
+        	<doc>ExtractItem</doc>
+        </entity>
+
+        <entity name="FastaFormat" class="org.sdm.spa.FastaFormat">
+        	<doc>FastaFormat</doc>
+        </entity>
+
+	<entity name="FileReader" class="ptolemy.actor.lib.io.FileReader">
+        	<doc>Read whole file and output as a string</doc>
+  	</entity>
+
+  	<entity name="Genbank" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.Genbank">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getSData">
+    		</property>
+    		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+  	</entity>
+
+        <entity name="GISequence" class="org.sdm.spa.GISequence">
+        	<doc>GISequence</doc>
+        </entity>
+
+        <entity name="GISequencePromoteRegion" class="org.sdm.spa.GISequencePromoteRegion">
+        	<doc>GISequencePromoteRegion</doc>
+        </entity>
+
+   	<entity name="LocalBlastOne" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdm_blastone">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.188:8080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="Blastn">
+    		</property>
+    		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+ 	</entity>
+
+	<entity name="Neighbor" class="org.sdm.spa.cipres.Neighbor">
+        	<doc>Neighbor</doc>
+        </entity>
+
+	<entity name="Pause" class="org.sdm.spa.Pause">
+        	<doc>Pause</doc>
+        </entity>
+
+        <entity name="StringConcat" class="org.sdm.spa.StringConcat">
+        	<doc>StringConcat</doc>
+        </entity>
+
+        <entity name="StringConst" class="org.sdm.spa.StringConst">
+        	<doc>StringConst</doc>
+        </entity>
+
+  	<entity name="Transfac" class="org.sdm.spa.WebServiceActor">
+		<property name="nameSpace" class="ptolemy.kernel.util.StringAttribute" value="urn:sdsc.service.Transfac">
+    		</property>
+		<property name="locationUrl" class="ptolemy.kernel.util.StringAttribute" value="http://152.1.158.185:9080/axis/servlet/AxisServlet">
+    		</property>
+		<property name="userName" class="ptolemy.kernel.util.StringAttribute" value="user1">
+    		</property>
+		<property name="password" class="ptolemy.kernel.util.StringAttribute" value="pass1">
+    		</property>
+    		<property name="method" class="ptolemy.kernel.util.StringAttribute" value="getAutoData">
+    		</property>
+     		<property name="paramName" class="ptolemy.kernel.util.StringAttribute" value="input">
+    		</property>
+	</entity>
+
+	<entity name="TreeView" class="org.sdm.spa.cipres.TreeView">
+        	<doc>TreeView</doc>
+        </entity>
+
+	<entity name="UserInteractiveShell" class="org.sdm.spa.gui.UserInteractiveShell">
+        	<doc>TryComboBox</doc>
+        </entity>
+
+	  <entity name="WebService" class="org.sdm.spa.WebService">
+	    <property name="wsdlUrl">
+	        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+	            <property name="DDBJ" value="http://xml.nig.ac.jp/wsdl/DDBJ.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+	            <property name="Blast" value="http://xml.nig.ac.jp/wsdl/Blast.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="Genbank" value="http://users.sdsc.edu/~altintas/genbank.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+	            <property name="ClustalW" value="http://xml.nig.ac.jp/wsdl/ClustalW.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="Fasta" value="http://xml.nig.ac.jp/wsdl/Fasta.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="TxSearch" value="http://xml.nig.ac.jp/wsdl/TxSearch.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="SRS" value="http://xml.nig.ac.jp/wsdl/SRS.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="OntoData" value="http://geon01.sdsc.edu:8080/axis/services/OntologyData?wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="ImgQuery" value="http://geon07.sdsc.edu:8080/axis/services/ImageQueryService?wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="ImgAssembly" value="http://geon07.sdsc.edu:8080/axis/services/ImageAssemblyService?wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="GrassService1" value="http://trestles.nceas.ucsb.edu:8004/seek/grass.wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+		    <property name="ZipCodesToIls" value="http://webservices.instantlogic.com/zipcodes.ils?wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>		              
+		    <property name="FindEmployees" value="http://jmc.sdsc.edu:8888/axis/services/FindEmployees?wsdl"
+		              class="ptolemy.kernel.util.StringAttribute"/>
+	        </property>
+	     </property>
+	    <property name="_icon" class="ptolemy.vergil.icon.AttributeValueIcon">
+	        <property name="attributeName" value="methodName"/>
+	    </property>
+	</entity>
+
+	<entity name="WSHarvester" class="org.sdm.spa.WSHarvester">
+        	<doc>WSHarvester</doc>
+        </entity>
+
+        <entity name="XSLTActor" class="org.sdm.spa.XSLTActor">
+        	<doc>XSLTActor</doc>
+        </entity>
+
+      </group>
+    ?>
+  </configure>
+</entity>

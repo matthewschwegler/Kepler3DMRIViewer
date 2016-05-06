@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE plot PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="Japan DDBJ Services" class="ptolemy.moml.EntityLibrary">
+  <configure>
+   <?moml
+      <group>
+  		<doc>DDBJ Services</doc>
+
+        <input source="org/sdm/spa/DDBJ_GetEntry.xml"/>
+        <input source="org/sdm/spa/DDBJ_DDBJ.xml"/>
+
+      </group>
+    ?>
+  </configure>
+</entity>

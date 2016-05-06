@@ -1,0 +1,4 @@
+includes=**
+jar.compress=false
+javac.classpath=\
+    ${file.reference.target-classes}:\

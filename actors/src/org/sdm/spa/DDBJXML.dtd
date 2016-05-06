@@ -1,0 +1,126 @@
+<!-- This dtd was defined by Satoru Miyazaki and Hideaki Sugawara as the prototype of XML of DDBJ entries. -->
+<!-- Please let us know any comments and suggestions. -->
+<!-- Email: smiyazak@genes.nig.ac.jp, hsugawar@genes.nig.ac.jp -->
+<!-- 11/07/2001 -->
+
+<!ELEMENT DDBJXML (LOCUS, LENGTH, DIVISION, LAST_UPDATE, DEFINITION, ACCESSION, VERSION,  KEYWORDS*, SOURCE, ORGANISM, TAXONOMY*, REFERENCE*,  COMMENT*, FEATURES+,  BASE_COUNT, SEQUENCE, EXPRESSION*,NAVIGATION*)>
+
+<!ELEMENT LOCUS (#PCDATA)>
+<!ELEMENT LENGTH (#PCDATA)>
+<!ELEMENT DIVISION (#PCDATA)>
+<!ELEMENT LAST_UPDATE (#PCDATA)>
+
+<!ELEMENT DEFINITION (#PCDATA)>
+<!ELEMENT ACCESSION (#PCDATA)>
+<!ELEMENT VERSION (#PCDATA)>
+
+
+<!ELEMENT KEYWORDS (#PCDATA)>
+<!ELEMENT SOURCE (#PCDATA)>
+<!ELEMENT ORGANISM (#PCDATA)>
+<!ELEMENT TAXONOMY (#PCDATA)>
+
+<!ELEMENT REFERENCE (authors?, title?, journal?)>
+<!ATTLIST REFERENCE ID CDATA #REQUIRED>
+                        <!ELEMENT authors (#PCDATA)>
+	<!ELEMENT title (#PCDATA)>	
+	<!ELEMENT journal (#PCDATA)>
+
+<!ELEMENT COMMENT (#PCDATA)>
+
+
+<!ELEMENT FEATURES ((source |_-| _-10_signal | _-35_signal |_3clip |_3utr |_5clip | _5utr | allele | attenuator | c_region | caat_signal | cds | conflict | d-loop | d_segment | enhancer | exon | gc_signal | gene | idna | intron | j_segment | ltr | mat_peptide | misc_binding | misc_difference | misc_feature | misc_recomb | misc_rna | misc_signal | misc_structure | modified_base | mrna | n_region | old_sequence | polya_signal | polya_site | precursor_rna | prim_transcript | primer_bind | promoter | protein_bind | rbs | rep_origin | repeat_region | repeat_unit | rrna |s_region| satellite | scrna | sig_peptide | snrna |  snorna | stem_loop | sts | tata_signal | terminator | transit_peptide | trna | unsure | v_region | v_segment | variation | virion)*)>
+	<!ELEMENT _-  (location, subsequence*, qualifiers*)>
+	<!ELEMENT _-10_signal  (location, subsequence*, qualifiers*)>
+	<!ELEMENT _-35_signal  (location, subsequence*, qualifiers*)>
+	<!ELEMENT _3clip (location, subsequence*, qualifiers*)>
+	<!ELEMENT _3utr (location, subsequence*, qualifiers*)>
+	<!ELEMENT _5clip (location, subsequence*, qualifiers*)>
+	<!ELEMENT _5utr (location, subsequence*, qualifiers*)>
+	<!ELEMENT allele (location, subsequence*, qualifiers*)>
+	<!ELEMENT attenuator (location, subsequence*, qualifiers*)>
+	<!ELEMENT c_region (location, subsequence*, qualifiers*)>
+	<!ELEMENT caat_signal (location, subsequence*, qualifiers*)>
+	<!ELEMENT cds (location+, subsequence*, qualifiers*)>
+	<!ELEMENT conflict (location, subsequence*, qualifiers+)>
+	<!ELEMENT d-loop (location, subsequence*, qualifiers*)>
+	<!ELEMENT d_segment (location, subsequence*, qualifiers*)>
+	<!ELEMENT enhancer (location, subsequence*, qualifiers*)>
+	<!ELEMENT exon (location, subsequence*, qualifiers*)>
+	<!ELEMENT gc_signal (location, subsequence*, qualifiers*)>
+	<!ELEMENT gene (location, subsequence*, qualifiers*)>
+	<!ELEMENT idna (location, subsequence*, qualifiers*)>
+	<!ELEMENT intron (location, subsequence*, qualifiers*)>
+	<!ELEMENT j_segment (location, subsequence*, qualifiers*)>
+	<!ELEMENT ltr (location, subsequence*, qualifiers*)>
+	<!ELEMENT mat_peptide (location, subsequence*, qualifiers*)>
+	<!ELEMENT misc_binding (location, subsequence*, qualifiers+)>
+	<!ELEMENT misc_difference (location, subsequence*, qualifiers*)>
+	<!ELEMENT misc_feature (location, subsequence*, qualifiers*)>
+	<!ELEMENT misc_recomb (location, subsequence*, qualifiers+)>
+	<!ELEMENT misc_rna (location, subsequence*, qualifiers*)>
+	<!ELEMENT misc_signal (location, subsequence*, qualifiers*)>
+	<!ELEMENT misc_structure (location, subsequence*, qualifiers*)>
+	<!ELEMENT modified_base (location, subsequence*, qualifiers+)>
+	<!ELEMENT mrna (location, subsequence*, qualifiers*)>
+	<!ELEMENT n_region (location, subsequence*, qualifiers*)>
+	<!ELEMENT old_sequence (location, subsequence*, qualifiers+)>
+	<!ELEMENT polya_signal (location, subsequence*, qualifiers*)>
+	<!ELEMENT polya_site (location, subsequence*, qualifiers*)>
+	<!ELEMENT precursor_rna (location, subsequence*, qualifiers*)>
+	<!ELEMENT prim_transcript (location, subsequence*, qualifiers*)>
+	<!ELEMENT primer_bind (location, subsequence*, qualifiers*)>
+	<!ELEMENT promoter (location, subsequence*, qualifiers*)>
+	<!ELEMENT protein_bind (location, subsequence*, qualifiers+)>
+	<!ELEMENT rbs (location, subsequence*, qualifiers*)>
+	<!ELEMENT rep_origin (location, subsequence*, qualifiers*)>
+	<!ELEMENT repeat_region (location, subsequence*, qualifiers*)>
+	<!ELEMENT repeat_unit (location, subsequence*, qualifiers*)>
+	<!ELEMENT rrna (location, subsequence*, qualifiers*)>
+	<!ELEMENT s_region (location, subsequence*, qualifiers*)>
+	<!ELEMENT satellite (location, subsequence*, qualifiers*)>
+	<!ELEMENT scrna (location, subsequence*, qualifiers*)>
+	<!ELEMENT sig_peptide (location, subsequence*, qualifiers*)>
+	<!ELEMENT snrna (location, subsequence*, qualifiers*)>
+	<!ELEMENT snorna (location, subsequence*, qualifiers*)>
+	<!ELEMENT source (location, subsequence*, qualifiers+)>
+	<!ELEMENT stem_loop (location, subsequence*, qualifiers*)>
+	<!ELEMENT sts (location, subsequence*, qualifiers*)>
+	<!ELEMENT tata_signal (location, subsequence*, qualifiers*)>
+	<!ELEMENT terminator (location, subsequence*, qualifiers*)>
+	<!ELEMENT transit_peptide (location, subsequence*, qualifiers*)>
+	<!ELEMENT trna (location, subsequence*, qualifiers*)>
+	<!ELEMENT unsure (location, subsequence*, qualifiers*)>
+	<!ELEMENT v_region (location, subsequence*, qualifiers*)>
+	<!ELEMENT v_segment (location, subsequence*, qualifiers*)>
+	<!ELEMENT variation  (location, subsequence*, qualifiers*)>
+	<!ELEMENT virion (location, subsequence*,  qualifiers*)>
+			
+	<!ELEMENT location (#PCDATA)>
+	
+	<!ELEMENT subsequence (#PCDATA)>
+	<!ATTLIST subsequence 
+	       complement CDATA #REQUIRED
+	       start_site CDATA #REQUIRED
+	       stop_site CDATA #REQUIRED>
+	
+	<!ELEMENT qualifiers (#PCDATA)>	
+	<!ATTLIST qualifiers name CDATA #REQUIRED>
+
+<!ELEMENT BASE_COUNT EMPTY>
+	<!ATTLIST BASE_COUNT 
+	                    A CDATA #IMPLIED
+	                    C CDATA #IMPLIED
+	                    G CDATA #IMPLIED
+	                    T CDATA  #IMPLIED
+	                    Other CDATA  #IMPLIED>
+	
+<!ELEMENT SEQUENCE (#PCDATA)>
+
+<!ELEMENT EXPRESSION (tissue*, method*, timecource*)>
+	<!ELEMENT tissue (#PCDATA)>
+	<!ELEMENT method (#PCDATA)>
+	<!ELEMENT timecource (#PCDATA)>
+
+<!ELEMENT NAVIGATION (#PCDATA)>
+	<!ATTLIST NAVIGATION FT_view CDATA #IMPLIED>

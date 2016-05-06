@@ -1,0 +1,100 @@
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="Javascript" class="ptolemy.kernel.ComponentEntity">
+    <property name="entityId" class="org.kepler.moml.NamedObjId" value="urn:lsid:kepler-project.org:actor:748:1">
+    </property>
+    <property name="class" class="ptolemy.kernel.util.StringAttribute" value="org.kepler.scriptengine.Javascript">
+        <property name="id" class="ptolemy.kernel.util.StringAttribute" value="null">
+        </property>
+    </property>
+    <property name="language" class="ptolemy.data.expr.StringParameter" value="javascript">
+    </property>
+    <property name="script" class="ptolemy.kernel.util.StringAttribute" value="//&#10;// A javascript actor to compute the factorial.&#10;//&#10;&#10;importClass(Packages.ptolemy.data.type.BaseType);&#10;importClass(Packages.ptolemy.data.IntToken);&#10;&#10;function Actor() {};&#10;&#10;// implement the &quot;fire&quot; function to be called each time the actor executes&#10;Actor.prototype.fire = function() {&#10;&#10;  // read from the &quot;input&quot; port&#10;  var val = this.input.get(0).intValue();&#10;  &#10;  if(val &lt; 0) {&#10;    error = &quot;Input must be greater than or equal to 0&quot;;&#10;  } else {&#10;    var total = 1;&#10;    while(val &gt; 1) {&#10;      total *= val;&#10;      val--;&#10;    }&#10;    // write the result to the &quot;output&quot; port&#10;    this.output.broadcast(new IntToken(total));&#10;  }&#10;};&#10;&#10;// define the &quot;preinitialize&quot; function to be called once when the workflow starts.&#10;Actor.prototype.preinitialize = function() {&#10;  // set the data types for the &quot;input&quot; and &quot;output&quot; ports.&#10;  this.input.setTypeEquals(BaseType.INT);&#10;  this.output.setTypeAtLeast(this.input);&#10;};&#10;">
+    </property>
+    <property name="input" class="org.kepler.moml.PortAttribute">
+        <property name="direction" class="ptolemy.kernel.util.StringAttribute" value="input"/>
+        <property name="dataType" value="unknown" class="ptolemy.kernel.util.StringAttribute"/>
+        <property name="isMultiport" value="false" class="ptolemy.kernel.util.StringAttribute"/>
+    </property>
+    <property name="output" class="org.kepler.moml.PortAttribute">
+        <property name="direction" class="ptolemy.kernel.util.StringAttribute" value="output"/>
+        <property name="dataType" value="unknown" class="ptolemy.kernel.util.StringAttribute"/>
+        <property name="isMultiport" value="false" class="ptolemy.kernel.util.StringAttribute"/>
+    </property>
+    <property name="semanticType00" class="org.kepler.sms.SemanticType" value="urn:lsid:localhost:onto:2:1#ScriptingLanguage">
+    </property>
+    <property name="_editorFactory" class="ptolemy.vergil.toolbox.TextEditorConfigureFactory">
+        <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="script">
+        </property>
+    </property>
+<property name="KeplerDocumentation" class="ptolemy.vergil.basic.KeplerDocumentationAttribute">
+<property name="description" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>null</configure>
+    </property>
+<property name="author" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>Daniel Crawl</configure>
+    </property>
+<property name="version" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>$Id$</configure>
+    </property>
+<property name="userLevelDocumentation" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>
+An actor whose execution is defined by a Javascript script.
+  The script can be edited by double-clicking on the actor.   
+  
+  &lt;p&gt;The following example defines an actor in Javascript that
+  computes factorials:&lt;/p&gt;
+&lt;pre&gt;
+1.  importClass(Packages.ptolemy.data.type.BaseType);
+2.  importClass(Packages.ptolemy.data.IntToken);
+3. 
+4.  function Actor() {};
+5. 
+6.  // implement the "fire" function to be called each time the actor executes
+7.  Actor.prototype.fire = function() {
+8. 
+9.    // read from the "input" port
+10.   var val = this.input.get(0).intValue();
+11.   
+12.   if(val &lt; 0) {
+13.     error = "Input must be greater than or equal to 0";
+14.   } else {
+15.     var total = 1;
+16.     while(val &gt; 1) {
+17.       total *= val;
+18.       val--;
+19.     }
+20.     // write the result to the "output" port
+21.     this.output.broadcast(new IntToken(total));
+22.   }
+23. };
+24. 
+25. // define the "preinitialize" function to be called once when the workflow starts.
+26. Actor.prototype.preinitialize = function() {
+27.   // set the data types for the "input" and "output" ports.
+28.   this.input.setTypeEquals(BaseType.INT);
+29.   this.output.setTypeAtLeast(this.input);
+30. };
+&lt;/pre&gt;
+
+  &lt;p&gt;Lines 1 and 2 import the Java classes used by the actor. Line 4 defines the
+  Actor object and is required in every Javascript. Lines 7-23 define the
+  fire() method of the actor; this method is called each time this actor
+  executes in the workflow. Line 10 reads an integer from the input port
+  called "input". A port or parameter called "foo" can be accessed in the
+  Javascript script by using "this.foo". Lines 12-19 compute the factorial
+  of the integer read from the port. Line 21 writes the result to the output
+  port called "output". Lines 26-29 define the preinitialize() method of this
+  actor, which is executed once when the workflow starts. Lines 28-29 set
+  the types for the input and output ports.&lt;/p&gt;</configure>
+    </property>
+<property name="prop:script" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>The contents of the script.</configure>
+    </property>
+<property name="prop:actorClassName" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>The name of the class in the script defining the execution methods.</configure>
+    </property>
+<property name="prop:language" class="ptolemy.kernel.util.ConfigurableAttribute">
+      <configure>The script language.</configure>
+    </property>
+</property>
+</entity>

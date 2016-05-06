@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="Java" class="ptolemy.kernel.ComponentEntity">
+<property name="entityId"  value="urn:lsid:kepler-project.org:actor:755:1" class="org.kepler.moml.NamedObjId"/>
+<property name="class" value="org.kepler.scriptengine.BeanShell" class="ptolemy.kernel.util.StringAttribute">
+  <property name="id" value="null" class="ptolemy.kernel.util.StringAttribute"/>
+</property>
+<property name="input" class="org.kepler.moml.PortAttribute">
+    <property name="direction" class="ptolemy.kernel.util.StringAttribute" value="input"/>
+    <property name="dataType" value="unknown" class="ptolemy.kernel.util.StringAttribute"/>
+    <property name="isMultiport" value="false" class="ptolemy.kernel.util.StringAttribute"/> 
+</property> 
+<property name="output" class="org.kepler.moml.PortAttribute">
+    <property name="direction" class="ptolemy.kernel.util.StringAttribute" value="output"/>
+    <property name="dataType" value="unknown" class="ptolemy.kernel.util.StringAttribute"/>
+    <property name="isMultiport" value="false" class="ptolemy.kernel.util.StringAttribute"/>
+</property>
+<property name="semanticType00" class="org.kepler.sms.SemanticType" value="urn:lsid:localhost:onto:2:1#ScriptingLanguage">
+</property>
+
+<property name="KeplerDocumentation" class="ptolemy.vergil.basic.KeplerDocumentationAttribute">
+<property name="description" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>null</configure></property>
+<property name="author" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>Daniel Crawl</configure></property>
+<property name="version" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>$Id: BeanShell.java 32807 2014-07-02 20:44:13Z crawl $</configure></property>
+<property name="userLevelDocumentation" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>&#10;An actor whose execution is defined by Java code.&#10;  The code can be edited by double-clicking on the actor.   &#10;  &#10;  &lt;p&gt;The following example defines an actor in Java that&#10;  computes factorials:&lt;/p&gt;&#10;  &#10;&lt;pre&gt;&#10;1. import ptolemy.data.IntToken;&#10;2.&#10;3. public class Actor {&#10;4.   public void fire() {&#10;5.     int val = ((IntToken)super.in.get(0)).intValue();&#10;6.&#10;7.     if(val &lt; 0) {&#10;8.       error(&quot;Input must be non-negative&quot;);&#10;9.     }&#10;10.    int total = 1;&#10;11.    while(val &gt; 1) {&#10;12.      total *= val;&#10;13.      val--;&#10;14.    } &#10;15.    out.broadcast(new IntToken(total));&#10;16.  }&#10;17.}&#10;&lt;/pre&gt;&#10;&#10;  &lt;p&gt;Line 1 imports the Java class used by the actor. Line 3 defines the&#10;  Actor object. Lines 4-16 define the fire() method of the actor; this&#10;  method is called each time this actor executes in the workflow. Line 5&#10;  reads an integer from the input port called &quot;input&quot;. A port or parameter&#10;  called &quot;foo&quot; can be accessed in the Java code by simply using &quot;foo&quot;.&#10;  Lines 10-14 compute the factorial of the integer read from the port.&#10;  Line 15 writes the result to the output port called &quot;output&quot;.</configure></property>
+<property name="prop:script" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>The contents of the script.</configure></property>
+<property name="prop:actorClassName" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>The name of the class in the script defining the execution methods.</configure></property>
+<property name="prop:language" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>The script language.</configure></property>
+</property></entity>

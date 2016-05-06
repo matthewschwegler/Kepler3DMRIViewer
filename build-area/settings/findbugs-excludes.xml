@@ -1,0 +1,10 @@
+<FindBugsFilter>
+    <!-- a list of classes for FindBugs to not analyze. -->
+    <Match classregex="com.jgoodies.*"/>
+    <Match classregex="com.microstar.*"/>
+    <Match classregex="diva.*"/>
+    <Match classregex="doc.doclets.*"/>
+    <Match classregex="org.json.*"/>
+    <Match classregex="org.mlc.*"/>
+    <Match classregex="ptolemy.*"/>
+</FindBugsFilter>

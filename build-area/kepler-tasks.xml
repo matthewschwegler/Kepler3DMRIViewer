@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="kepler-tasks" default="rejar">
+    
+	<target name="clean">
+        <delete dir="target/classes"/>
+        <delete file="target/kepler-tasks.jar"/>
+    </target>
+
+    <target name="rejar" depends="clean, jar, copy"/>
+
+    <target name="compile">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src" destdir="target/classes" debug="true" includeantruntime="false">
+            <classpath>
+                <fileset dir="lib"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="copy">
+        <copy file="target/kepler-tasks.jar" todir="../kepler-tasks/lib/jar/"/>
+        <echo>Don't forget to check in ../kepler-tasks/lib/jar/kepler-tasks.jar
+	  svn commit -m "build-area/target/kepler-tasks.jar changed" ../kepler-tasks/lib/jar/kepler-tasks.jar
+	</echo>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="target/kepler-tasks.jar" basedir="target/classes">
+            <manifest>
+                <attribute name="Main-Class" value="org.kepler.build.runner.Kepler"/>
+                <attribute name="Class-Path" value="build-area/lib/ant.jar"/>
+            </manifest>
+
+        </jar>
+    </target>
+	
+</project>

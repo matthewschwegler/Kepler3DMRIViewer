@@ -1,0 +1,331 @@
+For resources about what to exclude, see
+ptII/.classpath.in and ptII/.classpath.default
+These two files are used to configure Eclipse.
+
+.classpath.in is processed by configure and appropriate
+substitutions are made.
+
+.classpath.default may be used without changes in Eclipse
+
+See also ptII/adm/gen-7.2/src.ex, which is used to build nightly
+builds.
+
+In ptII/makefile, the CLEAN_SHIPPING_FILES variable lists files
+that should not be shipped.  See ptII/doc/coding/releasemgt.htm
+for details.
+
+(1)
+Exclusion: 
+ptolemy/actor/lib/x10/**
+
+Reason: 
+Depends on code that is licensed GPL.
+
+cxh: In Ptolemy, this code is conditionally compiled
+if the GPL'd library cannot be found.  Ideally, we
+would do a similar check at compile time?
+However, this code is used very little, so it is fine
+to exclude it.
+
+(2)
+Exclusion:
+ptolemy/apps/**
+
+Old Exclusion:
+ptolemy/apps/charon/Agent.java
+ptolemy/apps/charon/CharonCodeGenerator.java
+ptolemy/apps/charon/CharonProcessor.java
+ptolemy/apps/vergil/graph/MetaGraphController.java
+ptolemy/apps/vergil/graph/MetaGraphTableau.java
+ptolemy/apps/vergil/graph/MetaNodeController.java
+ptolemy/apps/vergil/graph/MetaNodeRenderer.java
+ptolemy/apps/vergil/graph/TestNodeRenderer.java
+ptolemy/apps/vergil/graph/render/FigureSource.java
+ptolemy/apps/vergil/graph/util/FigureToken.java
+ptolemy/apps/vergil/graph/util/MouseEventToken.java
+ptolemy/apps/fullscreen/sun/**
+ptolemy/apps/zaurus/demo/HelloPP/HelloPP.java
+
+Reason:
+cxh: Actually, all code in ptolemy/apps can be excluded.
+ptolemy/apps is for experimental code that is not shipped
+with the Windows installer.  Instead, users should
+include directories under ptolemy/apps as they need it.
+
+Currently, in .classpath.in, we exclude the apps directories
+by name because we are experimenting with Eclipse.  Also,
+configure does checks for various missing pieces and includes
+directories in apps as necessary.  
+
+However, in the near term, excluding everything in ptolemy/apps is fine.
+
+(3)
+Exclusion:
+ptolemy/backtrack/test/**
+
+Reason:
+The package of classes that these tests depend on are named incorrectly.
+
+cxh: I'm not sure about this.  Excluding them is probably fine.
+ 
+(5)
+Exclusion
+ptolemy/copernicus/kernel/fragment/**
+
+Reason:
+Excluded because of problems associated with Soot.
+
+cxh: all of copernicus/kernel/fragment should be excluded.
+
+(7)
+Exclusion:
+ptolemy/backtrack/eclipse/**
+
+Reason:
+Much of eclipse is platform specific.
+
+(8)
+Exclusion:
+ptolemy/domains/gr/**
+
+Reason:
+Depends on Java 3D, which is platform specific.
+
+(9)
+Exclusion:
+ptolemy/actor/lib/jai/**
+ptolemy/actor/lib/jmf/**
+
+Reason:
+JAI and JMF are platform specific.
+
+(10)
+Exclusion:
+ptolemy/actor/ptalon/**
+
+Reason:
+Requires antlr-3.1.2
+
+(11)
+Exclusion:
+ptolemy/actor/lib/jxta/**
+
+Reason:
+Requires apache-log4j-1.2.15
+
+(12)
+Exclusion:
+ptolemy/moml/jxta/**
+
+Reason:
+Requires jxta-1.0
+
+(13)
+Exclusion:
+ptolemy/plot/servlet/**
+
+Reason:
+Requires javax.servlet
+
+(14)
+Exclusion:
+ptolemy/distributed/**
+
+Reason:
+Requires apache-river-2.1.1
+
+(15)
+Exclusion:
+ptolemy/domains/ptinyos/**
+
+Reason:
+Requires jdom-1.1
+
+(16)
+Exclusion:
+ptolemy/copernicus/jhdl/**
+
+Reason:
+Requires jhdl-0.3.45
+
+(17)
+Exclusion:
+ptolemy/actor/lib/joystick/**
+
+Reason:
+Requires joystick-0.7
+
+(18)
+Exclusion:
+ptolemy/actor/lib/io/comm/**
+
+Reason:
+Requires rxtx-2.1-7-r2
+
+(19)
+Exclusion:
+ptolemy/verification/**
+
+Reason:
+MathematicalModelConverter does not compile.
+
+(20)
+Exclusion:
+ptolemy/domains/gro/**
+ptolemy/domains/jogl/**
+
+Reason:
+Requires jogl.jar and native libraries.
+
+(21)
+Exclusion:
+ptolemy/vergil/basic/export/itextpdf/**
+
+Reason:
+Uses iText.jar from http://itextpdf.com, which is AGPL.
+
+(22)
+Exclusion:
+ptolemy/actor/lib/reactable/**
+
+Reason:
+Uses TrackerRemote, which is a part of VRPN.
+
+(23)
+Exclusion:
+ptolemy/actor/lib/mail/**
+
+Reason:
+Uses JavaMail from Oracle.
+
+(24)
+Exclusion:
+ptolemy/domains/ptides/**
+
+Reason:
+Contains Bus.java and Tank.java, which import
+excluded ptolemy.domains.wireless. 
+
+(25)
+Exclusion:
+ptserver/**
+
+Reason:
+Imports mqtt, which is not included.
+
+(26)
+Exclusion:
+ptolemy/homer/**
+
+Reason:
+Imports ptserver
+
+(27)
+ptolemy/cg/**
+
+Reason:
+Imports from ptolemy/domains/ptides/**
+
+(28)
+org/ptolemy/fmi/**
+
+Reason:
+Uses jna.jar
+
+(29)
+ptolemy/actor/lib/fmi
+
+Reason:
+Uses org.ptolemy.fmi which uses jna.jar
+
+(31)
+ptolemy/vergil/basic/imprt/fmu
+
+Reason:
+Imports ptolemy.actor.lib.fmi.FMUImport, which is excuded, see (29)
+
+(32)
+**/test/**
+ptolemy/actor/lib/database/**
+ptolemy/actor/lib/embeddedJava/**
+ptolemy/actor/lib/jni/**
+ptolemy/actor/lib/jopio/**
+ptolemy/actor/lib/net/**
+ptolemy/actor/lib/security/**
+ptolemy/actor/lib/vhdl/**
+ptolemy/actor/lib/video/**
+ptolemy/caltrop/**
+ptolemy/data/ontologies/**
+ptolemy/domains/ca/**
+ptolemy/domains/ci/**
+ptolemy/domains/coroutine/**
+ptolemy/domains/csp/**
+ptolemy/domains/curriculum/**
+ptolemy/domains/dde/**
+ptolemy/domains/fsm/kernel/fmv/**
+ptolemy/domains/hdf/**
+ptolemy/domains/modal/kernel/fmv/**
+ptolemy/domains/ontologies/**
+ptolemy/domains/petrinet/**
+ptolemy/domains/psdf/**
+ptolemy/domains/pthales/**
+ptolemy/domains/rendezvous/**
+ptolemy/domains/sequence/**
+ptolemy/domains/space/**
+ptolemy/domains/sr/**
+ptolemy/domains/taskpt/**
+ptolemy/domains/tdl/**
+ptolemy/domains/tester/**
+ptolemy/domains/tm/**
+ptolemy/vergil/fsm/fmv/**
+ptolemy/vergil/modal/fmv/**
+ptolemy/vergil/ontologies/**
+ptolemy/vergil/tdl/**
+ptolemy/verification/**
+
+Reason:
+These classes are not used in Kepler.
+See http://bugzilla.ecoinformatics.org/show_bug.cgi?id=5589
+
+(33)
+ptolemy/actor/lib/openmodelica/**
+ptolemy/domains/openmodelica/**
+
+Reason:
+OpenModelica is not yet used by Kepler.
+
+(34)
+ptolemy/domains/metroII/**
+
+Reason:
+The Metropolis model of computation is not used by Kepler.
+
+(35)
+pt-modules/**
+
+Reason:
+The Ptolemy module work is not yet ready
+
+(36)
+ptolemy/domains/fmi/**
+
+Reason:
+Depends on org.ptolemy.fmi and jna.jar, which are excluded.
+
+(37)
+ptolemy/vergil/basic/export/html/jsoup/**
+
+Reason:
+Depends on jsoup
+
+(38)
+ptolemy/actor/lib/js/**
+
+Reason:
+Depends on Rhino's js.jar, which is checked in to $PTII/lib.  We want to use sun.*.internal* classes, which on the Mac are in rt.jar, so adding these would be a pain.  So, we add the jar.
+
+(39)
+org/terraswam/**
+
+Reason:
+Depends on ptolemy/actor/lib/js/

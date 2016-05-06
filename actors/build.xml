@@ -1,0 +1,29 @@
+<project name="actors" default="jar" basedir="../../">
+  <!-- import the targets from the main build file -->
+  <import file="../../build.xml"/>
+  <property name="name" value="actors"/>
+  
+  <!-- get depends for this module -->
+  <target name="getDependencies">
+    <echo>Building dependencies for actors</echo>  
+    
+    <variable name="cp" action="deserialize" serializeFile=".serialize" />    
+
+    <variable name="cp" action="append">
+      <pathelement location="${modulesdir}/actors/build/actors.jar"/>
+      <pathelement location="${modulesdir}/actors/build/classes"/>
+    </variable>
+
+    <variable name="cp" action="append">
+      <fileset dir="${modulesdir}/actors/lib/jar">
+        <include name="**/*.jar"/>
+      </fileset>
+    </variable>
+    
+    <!-- append any additional classpath needs to the variable here -->
+    
+    <variable name="cp" action="serialize" serializeFile=".serialize" />
+    <echo>Done with dependencies for actors</echo>
+  </target>
+  
+</project>

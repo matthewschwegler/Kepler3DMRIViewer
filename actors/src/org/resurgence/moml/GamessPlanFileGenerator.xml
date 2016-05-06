@@ -1,0 +1,261 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="GamessPlanFileGenerator" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="ExperimentName" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[455.0, 35.0]">
+        </property>
+    </property>
+    <property name="NumberOfMolecules" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[455.0, 65.0]">
+        </property>
+    </property>
+    <property name="GamessRunScript" class="ptolemy.data.expr.FileParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{0.0, 1.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:#00BB00" y="20">-F-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[710.0, 35.0]">
+        </property>
+    </property>
+    <property name="GamessVersionNumber" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[710.0, 65.0]">
+        </property>
+    </property>
+    <property name="NumberOfCpus" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[710.0, 95.0]">
+        </property>
+    </property>
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="[225.0, 360.0]">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1280, 828}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[1031, 705]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{515.5, 352.5}">
+    </property>
+    <port name="planFileHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[895.0, 500.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <port name="gamessInputHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 360.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="gamessOutputName" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[895.0, 570.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <port name="gamessDataName" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[895.0, 640.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <entity name="Copy From Node2" class="org.resurgence.moml.CopyFromNode">
+        <property name="SourceFileName" class="ptolemy.data.expr.StringParameter" value="$$MoleculeName.dat">
+        </property>
+        <property name="DestinationFileName" class="ptolemy.data.expr.StringParameter" value=".">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 510.0]">
+        </property>
+    </entity>
+    <entity name="End Plan File" class="org.resurgence.moml.EndPlanFile">
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[720.0, 500.0]">
+        </property>
+    </entity>
+    <entity name="Copy From Node" class="org.resurgence.moml.CopyFromNode">
+        <property name="SourceFileName" class="ptolemy.data.expr.StringParameter" value="$$MoleculeName.gamout">
+        </property>
+        <property name="DestinationFileName" class="ptolemy.data.expr.StringParameter" value=".">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 430.0]">
+        </property>
+    </entity>
+    <entity name="Start Plan File" class="org.resurgence.moml.StartPlanFile">
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 185.0]">
+        </property>
+    </entity>
+    <entity name="Copy To Node" class="org.resurgence.moml.CopyToNode">
+        <property name="SourceFileName" class="ptolemy.data.expr.StringParameter" value="$$MoleculeName.inp">
+        </property>
+        <property name="DestinationFileName" class="ptolemy.data.expr.StringParameter" value=".">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 275.0]">
+        </property>
+    </entity>
+    <entity name="Execute On Node" class="org.resurgence.moml.ExecuteOnNode">
+        <property name="Command" class="ptolemy.data.expr.StringParameter" value="$GamessRunScript $$MoleculeName.inp $GamessVersionNumber $NumberOfCpus &gt;&amp; $$MoleculeName.gamout">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 350.0]">
+        </property>
+    </entity>
+    <entity name="Anyof Parameter" class="org.resurgence.moml.AnyofParameter">
+        <property name="ParameterName" class="ptolemy.data.expr.StringParameter" value="MoleculeName">
+        </property>
+        <property name="ParameterType" class="ptolemy.data.expr.StringParameter" value="text">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[795.0, 185.0]">
+        </property>
+    </entity>
+    <entity name="Molecule Array Producer" class="org.resurgence.moml.MoleculeArrayProducer">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[315.0, 220.0]">
+        </property>
+        <property name="NumberOfMolecules" class="ptolemy.data.expr.StringParameter" value="$NumberOfMolecules">
+        </property>
+    </entity>
+    <entity name="File Location Chooser" class="org.resurgence.moml.FileLocationChooser">
+        <property name="NewFileDirectory" class="ptolemy.data.expr.StringParameter" value="$HOME/.nimrod/experiments/$ExperimentName">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[130.0, 560.0]">
+        </property>
+        <property name="InputFileType" class="ptolemy.data.expr.StringParameter" value="inp">
+        </property>
+        <property name="OutputFileType" class="ptolemy.data.expr.StringParameter" value="gamout">
+        </property>
+    </entity>
+    <entity name="File Name Chooser" class="org.resurgence.moml.FileNameChooser">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[320.0, 630.0]">
+        </property>
+        <property name="OutputFileType" class="ptolemy.data.expr.StringParameter" value="dat">
+        </property>
+    </entity>
+    <relation name="relation13" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation11" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[460.0, 220.0]">
+        </vertex>
+    </relation>
+    <relation name="relation10" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation17" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation15" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation14" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation16" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[260.0, 550.0]">
+        </vertex>
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="planFileHandle" relation="relation4"/>
+    <link port="gamessInputHandle" relation="relation"/>
+    <link port="gamessOutputName" relation="relation2"/>
+    <link port="gamessDataName" relation="relation6"/>
+    <link port="Copy From Node2.taskListIn" relation="relation16"/>
+    <link port="Copy From Node2.taskListOut" relation="relation17"/>
+    <link port="End Plan File.parameterList" relation="relation11"/>
+    <link port="End Plan File.taskList" relation="relation17"/>
+    <link port="End Plan File.planFileHandle" relation="relation4"/>
+    <link port="Copy From Node.taskListIn" relation="relation15"/>
+    <link port="Copy From Node.taskListOut" relation="relation16"/>
+    <link port="Start Plan File.trigger" relation="relation9"/>
+    <link port="Start Plan File.parameterList" relation="relation10"/>
+    <link port="Start Plan File.taskList" relation="relation14"/>
+    <link port="Copy To Node.taskListIn" relation="relation14"/>
+    <link port="Copy To Node.taskListOut" relation="relation13"/>
+    <link port="Execute On Node.taskListIn" relation="relation13"/>
+    <link port="Execute On Node.taskListOut" relation="relation15"/>
+    <link port="Anyof Parameter.parameterListIn" relation="relation10"/>
+    <link port="Anyof Parameter.valueArray" relation="relation9"/>
+    <link port="Anyof Parameter.defaultArray" relation="relation9"/>
+    <link port="Anyof Parameter.parameterListOut" relation="relation11"/>
+    <link port="Molecule Array Producer.moleculeFileHandle" relation="relation3"/>
+    <link port="Molecule Array Producer.moleculeNameArray" relation="relation9"/>
+    <link port="File Location Chooser.originalFileHandle" relation="relation"/>
+    <link port="File Location Chooser.inputFileHandle" relation="relation3"/>
+    <link port="File Location Chooser.outputFileName" relation="relation2"/>
+    <link port="File Name Chooser.inputFileHandle" relation="relation3"/>
+    <link port="File Name Chooser.outputFileName" relation="relation6"/>
+</class>

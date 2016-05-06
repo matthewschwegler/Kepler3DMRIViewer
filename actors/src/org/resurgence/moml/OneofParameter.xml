@@ -1,0 +1,188 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="OneofParameter" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="ParameterName" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[350.0, 35.0]">
+        </property>
+    </property>
+    <property name="ParameterType" class="ptolemy.data.expr.StringParameter" value="float">
+        <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+            <property name="float" class="ptolemy.kernel.util.StringAttribute" value="float">
+            </property>
+            <property name="integer" class="ptolemy.kernel.util.StringAttribute" value="integer">
+            </property>
+            <property name="text" class="ptolemy.kernel.util.StringAttribute" value="text">
+            </property>
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:red" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[350.0, 60.0]">
+        </property>
+    </property>
+    <property name="DefaultValue" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text style="font-size:14; font-family:SansSerif; fill:blue" x="20" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[625.0, 35.0]">
+        </property>
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="{383.083984375, 314.4443359375}">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1024, 804}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[775, 681]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{387.5, 340.5}">
+    </property>
+    <port name="parameterListIn" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[30.0, 145.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="valueArray" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 345.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="parameterListOut" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[655.0, 145.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <entity name="String Constant" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="parameter $ParameterName $ParameterType select oneof">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[189.0, 260.0]">
+        </property>
+    </entity>
+    <entity name="Array Accumulator" class="org.resurgence.actor.ArrayAccumulator">
+        <property name="Element separator" class="ptolemy.data.expr.Parameter" value="&quot; &quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[219.0, 345.0]">
+        </property>
+    </entity>
+    <entity name="String Constant2" class="ptolemy.actor.lib.StringConst">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <property name="value" class="ptolemy.data.expr.Parameter" value="default $DefaultValue">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[189.0, 410.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot; &quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[408.0, 345.0]">
+        </property>
+    </entity>
+    <entity name="String Replace" class="ptolemy.actor.lib.string.StringReplace">
+        <property name="pattern" class="ptolemy.actor.parameters.PortParameter" value=" default $$">
+        </property>
+        <property name="replaceAll" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[598.0, 335.0]">
+        </property>
+    </entity>
+    <entity name="String Accumulator2" class="org.resurgence.actor.StringAccumulator">
+        <property name="Substring separator" class="ptolemy.data.expr.Parameter" value="&quot;&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[340.0, 145.0]">
+        </property>
+    </entity>
+    <entity name="Single Fire Constant" class="org.geon.ConstOnce">
+        <property name="value" class="ptolemy.data.expr.Parameter" value="&quot;;\n&quot;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{205.0, 545.0}">
+        </property>
+    </entity>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[114.0, 345.0]">
+        </vertex>
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[175.0, 145.0]">
+        </vertex>
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="parameterListIn" relation="relation9"/>
+    <link port="valueArray" relation="relation"/>
+    <link port="parameterListOut" relation="relation2"/>
+    <link port="String Constant.output" relation="relation5"/>
+    <link port="String Constant.trigger" relation="relation"/>
+    <link port="Array Accumulator.array" relation="relation"/>
+    <link port="Array Accumulator.string" relation="relation6"/>
+    <link port="String Constant2.output" relation="relation7"/>
+    <link port="String Constant2.trigger" relation="relation"/>
+    <link port="String Accumulator.parts" relation="relation5"/>
+    <link port="String Accumulator.parts" relation="relation6"/>
+    <link port="String Accumulator.parts" relation="relation7"/>
+    <link port="String Accumulator.whole" relation="relation8"/>
+    <link port="String Replace.stringToEdit" relation="relation8"/>
+    <link port="String Replace.output" relation="relation3"/>
+    <link port="String Accumulator2.parts" relation="relation9"/>
+    <link port="String Accumulator2.parts" relation="relation3"/>
+    <link port="String Accumulator2.parts" relation="relation4"/>
+    <link port="String Accumulator2.whole" relation="relation2"/>
+    <link port="Single Fire Constant.output" relation="relation4"/>
+    <link port="Single Fire Constant.trigger" relation="relation9"/>
+</class>

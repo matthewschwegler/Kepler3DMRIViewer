@@ -1,0 +1,236 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="GamessNimrodRun" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="ExperimentName" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{420.0, 35.0}">
+        </property>
+    </property>
+    <property name="NumberOfMolecules" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[420.0, 95.0]">
+        </property>
+    </property>
+    <property name="GamessRunScript" class="ptolemy.data.expr.FileParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{0.0, 1.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:#00BB00" y="20">-F-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[735.0, 35.0]">
+        </property>
+    </property>
+    <property name="GamessVersionNumber" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[735.0, 65.0]">
+        </property>
+    </property>
+    <property name="NumberOfCpus" class="ptolemy.data.expr.StringParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{1.0, 0.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:red" y="20">-S-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[735.0, 95.0]">
+        </property>
+    </property>
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="5.0-beta">
+    </property>
+    <property name="_location" class="ptolemy.kernel.util.Location" value="[190.0, 425.0]">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 22, 1280, 828}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[1031, 705]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{515.5, 352.5}">
+    </property>
+    <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter">
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{0.0, 1.0, 0.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+          <svg>
+            <text x="20" style="font-size:14; font-family:SansSerif; fill:#00BB00" y="20">-F-</text>
+          </svg>
+        </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[420.0, 65.0]">
+        </property>
+    </property>
+    <port name="gamessOutputHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[890.0, 430.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="gamessDataHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[890.0, 530.0]">
+        </property>
+        <property name="_showName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </port>
+    <port name="gamessInputHandle" class="ptolemy.actor.TypedIOPort">
+        <property name="input"/>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, 250.0]">
+        </property>
+        <property name="_showName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+    </port>
+    <entity name="GAMESS Plan File Generator" class="org.resurgence.moml.GamessPlanFileGenerator">
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="NumberOfMolecules" class="ptolemy.data.expr.StringParameter" value="$NumberOfMolecules">
+        </property>
+        <property name="GamessRunScript" class="ptolemy.data.expr.FileParameter" value="$GamessRunScript">
+        </property>
+        <property name="GamessVersionNumber" class="ptolemy.data.expr.StringParameter" value="$GamessVersionNumber">
+        </property>
+        <property name="NumberOfCpus" class="ptolemy.data.expr.StringParameter" value="$NumberOfCpus">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[310.0, 250.0]">
+        </property>
+    </entity>
+    <entity name="Experiment Preparator" class="org.resurgence.moml.ExperimentPreparator">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[630.0, 240.0]">
+        </property>
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter" value="$NimrodBinary">
+        </property>
+    </entity>
+    <entity name="Fork Resource Adder" class="org.resurgence.moml.ForkResourceAdder">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[915.0, 240.0]">
+        </property>
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter" value="$NimrodBinary">
+        </property>
+    </entity>
+    <entity name="Experiment Starter" class="org.resurgence.moml.ExperimentStarter">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[95.0, 480.0]">
+        </property>
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter" value="$NimrodBinary">
+        </property>
+    </entity>
+    <entity name="Experiment Monitor" class="org.resurgence.moml.ExperimentMonitor">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[370.0, 480.0]">
+        </property>
+        <property name="ExperimentName" class="ptolemy.data.expr.StringParameter" value="$ExperimentName">
+        </property>
+        <property name="NimrodBinary" class="ptolemy.data.expr.FileParameter" value="$NimrodBinary">
+        </property>
+    </entity>
+    <entity name="File List Sequencer" class="org.resurgence.moml.FileListSequencer">
+        <property name="DirectoryHandle" class="ptolemy.data.expr.StringParameter" value="$HOME/.nimrod/experiments/$ExperimentName">
+        </property>
+        <property name="FileType" class="ptolemy.data.expr.StringParameter" value="gamout">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[660.0, 430.0]">
+        </property>
+    </entity>
+    <entity name="File List Sequencer2" class="org.resurgence.moml.FileListSequencer">
+        <property name="DirectoryHandle" class="ptolemy.data.expr.StringParameter" value="$HOME/.nimrod/experiments/$ExperimentName">
+        </property>
+        <property name="FileType" class="ptolemy.data.expr.StringParameter" value="dat">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[660.0, 530.0]">
+        </property>
+    </entity>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[480.0, 480.0]">
+        </vertex>
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation9" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[240.0, 360.0]">
+        </vertex>
+    </relation>
+    <link port="gamessOutputHandle" relation="relation6"/>
+    <link port="gamessDataHandle" relation="relation7"/>
+    <link port="gamessInputHandle" relation="relation2"/>
+    <link port="GAMESS Plan File Generator.planFileHandle" relation="relation"/>
+    <link port="GAMESS Plan File Generator.gamessInputHandle" relation="relation2"/>
+    <link port="Experiment Preparator.planFileHandle" relation="relation"/>
+    <link port="Experiment Preparator.output" relation="relation4"/>
+    <link port="Fork Resource Adder.trigger" relation="relation4"/>
+    <link port="Fork Resource Adder.output" relation="relation9"/>
+    <link port="Experiment Starter.trigger" relation="relation9"/>
+    <link port="Experiment Monitor.trigger" relation="relation9"/>
+    <link port="Experiment Monitor.exitCode" relation="relation8"/>
+    <link port="File List Sequencer.fileHandle" relation="relation6"/>
+    <link port="File List Sequencer.trigger" relation="relation8"/>
+    <link port="File List Sequencer2.fileHandle" relation="relation7"/>
+    <link port="File List Sequencer2.trigger" relation="relation8"/>
+</class>

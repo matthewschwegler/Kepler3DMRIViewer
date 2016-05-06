@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.svn" />
+      <excludeFolder url="file://$MODULE_DIR$/src/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/src/adm" />
+      <excludeFolder url="file://$MODULE_DIR$/src/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/src/config" />
+      <excludeFolder url="file://$MODULE_DIR$/src/contrib" />
+      <excludeFolder url="file://$MODULE_DIR$/src/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/src/jni" />
+      <excludeFolder url="file://$MODULE_DIR$/src/lbnl" />
+      <excludeFolder url="file://$MODULE_DIR$/src/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/src/mk" />
+      <excludeFolder url="file://$MODULE_DIR$/src/org/ptolemy/fmi" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/fmi" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/io/comm" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/jai" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/jmf" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/joystick" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/js" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/jxta" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/logic/fuzzy" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/opencv" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/openmodelica" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/mail" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/reactable" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/lib/x10" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/actor/ptalon" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/apps" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/backtrack/eclipse" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/backtrack/test" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/codegen/c/targets/openRTOS" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/copernicus/jhdl" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/copernicus/kernel/fragment" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/distributed" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/gr" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/gro" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/metroII" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/openmodelica" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/ptinyos" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/ptides" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/moml/jxta" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/plot/servlet" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/vergil/basic/export/html/jsoup" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/vergil/basic/export/itextpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/vergil/basic/imprt/fmu" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/domains/jogl" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptdb" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptserver" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/homer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/ptolemy/cg"  />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="resources">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib" />
+          <root url="file://$MODULE_DIR$/src/resources" />
+          <root url="file://$MODULE_DIR$/src/lib/images" />
+          <root url="file://$MODULE_DIR$/src/lib" />
+          <root url="file://$MODULE_DIR$/src/configs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/batik-all-1.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/guava.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>    

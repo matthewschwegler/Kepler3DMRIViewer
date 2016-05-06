@@ -1,0 +1,351 @@
+<project name="taskdefs">
+
+    <typedef name="maven"
+        classname="org.kepler.build.Maven"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="ivy"
+        classname="org.kepler.build.Ivy">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/ivy-2.2.0.jar"/>
+        </classpath>
+    </typedef>
+
+    <typedef name="add-search-url"
+        classname="org.kepler.build.AddSearchUrl"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="list-search-urls"
+        classname="org.kepler.build.ListSearchUrls"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="remove-search-url"
+        classname="org.kepler.build.RemoveSearchUrl"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="get-modules"
+        classname="org.kepler.build.Get"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="change-to"
+        classname="org.kepler.build.ChangeTo"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<taskdef name="if"
+        classname="net.sf.antcontrib.logic.IfTask">
+		<classpath path="build-area/lib/ant-contrib-1.0b3.jar"/>
+	</taskdef>
+
+	<typedef name="compile"
+        classname="org.kepler.build.CompileModules"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="kar"
+        classname="org.kepler.build.MakeKars"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean-kar"
+        classname="org.kepler.build.CleanKar"
+        classpath="build-area/target/kepler-tasks.jar"/>
+        
+  <typedef name="clean-cache"
+        classname="org.kepler.build.CleanCache"
+        classpath="build-area/target/kepler-tasks.jar"/>
+        
+  <typedef name="clean-dot-kepler"
+        classname="org.kepler.build.CleanDotKepler"
+        classpath="build-area/target/kepler-tasks.jar"/>
+	
+  <typedef name="package"
+        classname="org.kepler.build.Package"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+  <typedef name="deploy"
+        classname="org.kepler.build.Deploy"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="jar-modules"
+        classname="org.kepler.build.JarModules"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean-jar"
+        classname="org.kepler.build.CleanJar"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="run"
+        classname="org.kepler.build.Run"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="runner"
+        classname="org.kepler.build.runner.Kepler"
+        classpath="build-area/target/kepler-tasks.jar"/>
+  
+    <typedef name="nmi"
+        classname="org.kepler.build.NMI"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="test"
+        classname="org.kepler.build.Test"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="test-workflows"
+        classname="org.kepler.build.RunTestWorkflows"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean"
+        classname="org.kepler.build.Clean"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="clean-classes"
+        classname="org.kepler.build.CleanClasses"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="idea"
+        classname="org.kepler.build.ide.Idea"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean-idea"
+        classname="org.kepler.build.ide.CleanIdea"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="eclipse"
+        classname="org.kepler.build.ide.Eclipse"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean-eclipse"
+        classname="org.kepler.build.ide.CleanEclipse"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="netbeans"
+        classname="org.kepler.build.ide.Netbeans"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="clean-netbeans"
+        classname="org.kepler.build.ide.CleanNetbeans"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="make-suite"
+        classname="org.kepler.build.MakeSuite"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="make-module"
+        classname="org.kepler.build.MakeModule"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="register-module-location"
+        classname="org.kepler.build.RegisterModuleLocation"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="make-module-suite"
+        classname="org.kepler.build.MakeModuleSuite"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="create-javadoc"
+        classname="org.kepler.build.CreateJavadoc"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="report-overrides"
+		classname="org.kepler.build.ReportOverrides"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="report-dependencies"
+		classname="org.kepler.build.ReportDependencies"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+	<typedef name="describe-module"
+        classname="org.kepler.build.DescribeModule"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="update-modules"
+        classname="org.kepler.build.UpdateModules">
+		<classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/ivy-2.2.0.jar"/>
+        </classpath>
+    </typedef>
+	
+	<typedef name="update-all"
+        classname="org.kepler.build.UpdateAll"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="update-released-txt"
+        classname="org.kepler.build.UpdateReleasedTxt"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="update-present-txt"
+        classname="org.kepler.build.UpdatePresentTxt"
+		classpath="build-area/target/kepler-tasks.jar"/>
+		
+	<typedef name="upload-module"
+        classname="org.kepler.build.UploadModule"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="tag"
+        classname="org.kepler.build.Tag"
+		classpath="build-area/target/kepler-tasks.jar"/>
+		
+	<typedef name="branch"
+        classname="org.kepler.build.Branch"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="branch-main"
+        classname="org.kepler.build.MainBranch"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="print-branch-commands"
+        classname="org.kepler.build.PrintBranchCommands"
+        classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="publish-ptolemy"
+        classname="org.kepler.build.PublishPtolemy"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="patch-module"
+        classname="org.kepler.build.Patch"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+	<typedef name="list-modules"
+		classname="org.kepler.build.ListModules"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+  	<typedef name="status-modules"
+        classname="org.kepler.build.StatusModules"
+        classpath="build-area/target/kepler-tasks.jar"/>
+  	
+    <typedef name="diff-modules"
+        classname="org.kepler.build.DiffModules"
+        classpath="build-area/target/kepler-tasks.jar"/>
+  
+  	<typedef name="make-startup-scripts"
+        classname="org.kepler.build.MakeStartupScripts">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+        </classpath>
+    </typedef>      
+	
+	<typedef name="show-lsids"
+		classname="org.kepler.build.ShowLsids"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<!--=============-->
+	<!-- Query Tasks -->
+	<!--=============-->
+	
+	<typedef name="what-suite"
+		classname="org.kepler.build.WhatSuite"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+
+	<!--==================-->
+	<!-- Management Tasks -->
+	<!--==================-->
+    
+    <typedef name="make-debian-package"
+		classname="org.kepler.build.installer.MakeDebianPackage">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+        </classpath>
+    </typedef>
+
+    <typedef name="make-linux-installer"
+		classname="org.kepler.build.installer.MakeLinuxInstaller">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+        </classpath>
+    </typedef>
+
+    <typedef name="make-macosx-installer"
+		classname="org.kepler.build.installer.MakeMacOSXInstaller">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+        </classpath>
+    </typedef>
+
+    <typedef name="make-windows-installer"
+		classname="org.kepler.build.installer.MakeWindowsInstaller">
+		<classpath>
+			<pathelement location="build-area/target/kepler-tasks.jar"/>
+			<pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+			<pathelement location="build-area/lib/launch4j-3.0.2.jar"/>
+			<pathelement location="build-area/lib/launch4j-3.0.2-xstream.jar"/>
+			<pathelement location="build-area/lib/izpack-standalone-compiler-4.3.3.jar"/>
+		</classpath>
+	</typedef>
+  
+	<typedef name="analyze-jars"
+		classname="org.kepler.build.AnalyzeJars"
+	   	classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="format"
+		classname="org.kepler.build.Format">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/formatter/org.eclipse.text_3.5.0.v20090513-2000.jar"/>
+            <pathelement location="build-area/lib/formatter/org.eclipse.equinox.common_3.5.1.R35x_v20090807-1100.jar"/>
+            <pathelement location="build-area/lib/formatter/org.eclipse.jdt.core_3.5.1.v_972_R35x.jar"/>
+            <pathelement location="build-area/lib/formatter/org.eclipse.osgi_3.5.1.R35x_v20090827.jar"/>
+        </classpath>
+    </typedef>
+
+	<typedef name="build-test"
+		classname="org.kepler.build.BuildTest"
+		classpath="build-area/target/kepler-tasks.jar"/>	
+	
+	<typedef name="get-all-modules"
+		classname="org.kepler.build.GetAllModules"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+	<typedef name="list-suites"
+		classname="org.kepler.build.ListSuites"
+		classpath="build-area/target/kepler-tasks.jar"/>
+		
+	<typedef name="report-all-overrides"
+		classname="org.kepler.build.ReportAllOverrides"
+		classpath="build-area/target/kepler-tasks.jar"/>
+		
+	<typedef name="validate-ptolemy"
+        classname="org.kepler.build.ValidatePtolemy"
+		classpath="build-area/target/kepler-tasks.jar"/>	
+	
+	<typedef name="publish"
+        classname="org.kepler.build.Release"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="find"
+        classname="org.kepler.build.Find"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+	<typedef name="update-ptolemy"
+		classname="org.kepler.build.UpdatePtolemy"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+	<typedef name="upgrade-kepler-tasks"
+		classname="org.kepler.build.UpgradeKeplerTasks"
+		classpath="build-area/target/kepler-tasks.jar"/>
+	
+	<typedef name="make-kars"
+		classname="org.kepler.build.MakeKars"
+		classpath="build-area/target/kepler-tasks.jar"/>
+
+    <typedef name="force-ptolemy"
+		classname="org.kepler.build.ForcePtolemy"
+		classpath="build-area/target/kepler-tasks.jar"/>
+    
+    <typedef name="change-splash-screen"
+		classname="org.kepler.build.ChangeSplashScreen">
+        <classpath>
+            <pathelement location="build-area/target/kepler-tasks.jar"/>
+            <pathelement location="build-area/lib/freemarker-2.3.16.jar"/>
+        </classpath>
+    </typedef>
+	
+	<typedef name="update-copyright"
+	    classname="org.kepler.build.UpdateCopyright"
+	    classpath="build-area/target/kepler-tasks.jar"/>
+
+</project>
